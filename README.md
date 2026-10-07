@@ -22,7 +22,7 @@ language extension; this project does not install language support.
 | `#8a6408` | Accessible ochre | Keywords, numbers, booleans, warning text |
 | `#a8322a` | Muted red | Errors and deleted content |
 | `#cfd6d2` | Soft gray-green | Borders and separators |
-| `#eef2ef` | Pale green-gray | Sidebars, secondary surfaces, inline code |
+| `#eef2ef` | Pale green-gray | Sidebars, secondary surfaces, code blocks in hovers |
 | `#f6f8f6` | Almost-white green | Subtle editor highlights and welcome surfaces |
 | `#ffffff` | White | Main editor and widget backgrounds |
 
@@ -30,19 +30,88 @@ The brighter ochre `#b8860b` is kept mainly to larger UI indicators. The
 darker `#8a6408` is used for small text such as keywords and warnings to keep
 it readable on light backgrounds.
 
+### Derived tints
+
+A few interface states need a value between two palette colors. Each one is
+derived from the palette and has a single job:
+
+| Color | Derived from | Role |
+| --- | --- | --- |
+| `#245630` | Forest green, darker | Button hover, active links, highlighted letters in a focused list item |
+| `#7f8a86` | Muted gray-green, lighter | Input, dropdown, and checkbox borders (3.57:1); bracket match outline; ghost text; quote bar |
+| `#8c9894` | Muted gray-green, lighter | Decorations only: active indent guide, disabled breakpoint |
+| `#c7d7cb` | 20% forest green over `#eef2ef` | Selected item in lists and trees |
+| `#d5e1d8` | 20% forest green over white | Selected item in menus, Quick Open, and suggestions |
+| `#dce8df` | Forest green tint | Inactive list selection, badges, menu bar |
+| `#dfe7e1` | Forest green tint | List hover |
+| `#e4ebe6` | Forest green tint | Tab and button hover |
+| `#e4e9e6` | Border gray-green, lighter | Indent guides and rulers |
+| `#fcf3f2` | Muted red tint | Validation and exception widget backgrounds |
+| `#f8edc9` | Warm ochre tint | Warning validation background |
+| `#e5f0e7` | Forest green tint | Info validation background |
+
+Editor layers that VS Code paints on top of each other (selection, find and
+word highlights, diff backgrounds, merge conflicts) use translucent forms of
+the palette, such as `#2d6a3b33` (forest green at 20%) or `#b8860b26` (warm
+ochre at 15%), so overlapping highlights stay visible.
+
+## Accessibility
+
+- Editor text, keywords, strings, types, comments, and errors meet WCAG AA
+  (at least 4.5:1) on the editor background and on the current-line
+  highlight.
+- Secondary text on the pale `#eef2ef` surfaces uses `#5d6864` (5.12:1);
+  the lighter `#66716d` is used for text only on white.
+- Input, dropdown, and checkbox borders meet the 3:1 non-text contrast
+  requirement.
+- Selected, hovered, and keyboard-focused list items are distinct; keyboard
+  focus is also shown with a forest green outline.
+- The current find match has an ochre outline in addition to its fill.
+- Colors are never the only signal VS Code uses for diff, Git, test, and
+  problem states, which also show `+`/`-` markers, letters, or icons.
+
+Comments and parameters are italic. If your font has no true italic, or you
+find italics harder to read, turn them off in your user settings:
+
+```jsonc
+"editor.tokenColorCustomizations": {
+  "[Verdant Ledger Light]": {
+    "textMateRules": [
+      {
+        "scope": ["comment", "punctuation.definition.comment", "variable.parameter"],
+        "settings": { "fontStyle": "" }
+      }
+    ]
+  }
+},
+"editor.semanticTokenColorCustomizations": {
+  "[Verdant Ledger Light]": {
+    "rules": { "parameter": { "italic": false } }
+  }
+}
+```
+
 ## Syntax color guide
 
 | Syntax role | Color treatment |
 | --- | --- |
 | Comments | Muted gray-green, italic |
 | Keywords and control flow | Accessible ochre |
+| Symbolic operators (`=`, `=>`, `+`, `&&`) | Evergreen gray |
+| Word operators (`new`, `typeof`, `and`, `in`) | Accessible ochre |
 | Strings | Forest green |
 | Functions and ordinary variables | Deep evergreen |
 | Types, classes, and markup tags | Forest green |
 | Parameters and JSON/YAML keys | Evergreen gray |
 | Punctuation and structural separators | Muted gray-green |
+| Bracket pairs (nesting levels 1–3) | Accessible ochre, forest green, evergreen gray |
+| Markdown inline code | Accessible ochre |
+| Deprecated symbols (semantic) | Strikethrough |
 | Errors and deleted diff lines | Muted red |
 | Inserted diff lines | Forest green |
+
+Semantic highlighting is enabled, so language servers such as TypeScript and
+Pylance can refine the TextMate colors with the same palette.
 
 Language-specific rules refine the shared palette. JSON/YAML keys are distinct
 from values, CSS selectors are green, TOML section names are green and bold,
