@@ -22,7 +22,7 @@ language extension; this project does not install language support.
 | `#8a6408` | Accessible ochre | Keywords, numbers, booleans, warning text |
 | `#a8322a` | Muted red | Errors and deleted content |
 | `#cfd6d2` | Soft gray-green | Borders and separators |
-| `#eef2ef` | Pale green-gray | Sidebars, secondary surfaces, inline code |
+| `#eef2ef` | Pale green-gray | Sidebars, secondary surfaces, code blocks in hovers |
 | `#f6f8f6` | Almost-white green | Subtle editor highlights and welcome surfaces |
 | `#ffffff` | White | Main editor and widget backgrounds |
 
@@ -36,13 +36,21 @@ it readable on light backgrounds.
 | --- | --- |
 | Comments | Muted gray-green, italic |
 | Keywords and control flow | Accessible ochre |
+| Symbolic operators (`=`, `=>`, `+`, `&&`) | Evergreen gray |
+| Word operators (`new`, `typeof`, `and`, `in`) | Accessible ochre |
 | Strings | Forest green |
 | Functions and ordinary variables | Deep evergreen |
 | Types, classes, and markup tags | Forest green |
 | Parameters and JSON/YAML keys | Evergreen gray |
 | Punctuation and structural separators | Muted gray-green |
+| Bracket pairs (nesting levels 1–3) | Accessible ochre, forest green, evergreen gray |
+| Markdown inline code | Accessible ochre |
+| Deprecated symbols (semantic) | Strikethrough |
 | Errors and deleted diff lines | Muted red |
 | Inserted diff lines | Forest green |
+
+Semantic highlighting is enabled, so language servers such as TypeScript and
+Pylance can refine the TextMate colors with the same palette.
 
 Language-specific rules refine the shared palette. JSON/YAML keys are distinct
 from values, CSS selectors are green, TOML section names are green and bold,
