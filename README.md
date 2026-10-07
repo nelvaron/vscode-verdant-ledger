@@ -17,18 +17,27 @@ language extension; this project does not install language support.
 | `#1b2320` | Deep evergreen | Main editor text, variables, functions |
 | `#5d6864` | Evergreen gray | Secondary text, parameters, JSON/YAML keys |
 | `#66716d` | Muted gray-green | Comments, hints, subdued interface labels |
-| `#2d6a3b` | Forest green | Theme accent, strings, types, markup tags |
+| `#2d6a3b` | Forest green | Theme accent, strings, markup tags, success |
 | `#b8860b` | Warm ochre | Interface warning accent and modified-file marker |
 | `#8a6408` | Accessible ochre | Keywords, numbers, booleans, warning text |
 | `#a8322a` | Muted red | Errors and deleted content |
+| `#3d5f7a` | Slate blue | Types, classes, interfaces; information messages; terminal blue |
+| `#2f6b6b` | Muted teal | Second bracket level; terminal cyan |
+| `#7a4a6e` | Plum | Third bracket level; terminal magenta |
 | `#cfd6d2` | Soft gray-green | Borders and separators |
 | `#eef2ef` | Pale green-gray | Sidebars, secondary surfaces, code blocks in hovers |
-| `#f6f8f6` | Almost-white green | Subtle editor highlights and welcome surfaces |
-| `#ffffff` | White | Main editor and widget backgrounds |
+| `#f6f8f6` | Almost-white green | Editor, panel, and terminal background |
+| `#ffffff` | White | Floating widgets, menus, inputs, and peek editors |
 
 The brighter ochre `#b8860b` is kept mainly to larger UI indicators. The
 darker `#8a6408` is used for small text such as keywords and warnings to keep
 it readable on light backgrounds.
+
+Slate blue, teal, and plum are deliberately muted so they sit with the greens
+and ochres. Slate blue gives types and information messages their own color,
+apart from strings and success states. Teal and plum appear only where
+several things must be told apart at once: nested brackets, the terminal,
+and graphs.
 
 ### Derived tints
 
@@ -48,7 +57,9 @@ derived from the palette and has a single job:
 | `#e4e9e6` | Border gray-green, lighter | Indent guides and rulers |
 | `#fcf3f2` | Muted red tint | Validation and exception widget backgrounds |
 | `#f8edc9` | Warm ochre tint | Warning validation background |
-| `#e5f0e7` | Forest green tint | Info validation background |
+| `#ebeff1` | Slate blue tint | Info validation background |
+| `#f0f3f1` | Pale surface, lighter | Current line highlight (comments stay at 4.53:1) |
+| `#b8443a` `#3a7d4a` `#8f6809` `#4a6e8e` `#8d5a80` `#367878` | Red, green, ochre, slate, plum, teal | Bright terminal colors (at least 4.67:1) |
 
 Editor layers that VS Code paints on top of each other (selection, find and
 word highlights, diff backgrounds, merge conflicts) use translucent forms of
@@ -61,7 +72,10 @@ ochre at 15%), so overlapping highlights stay visible.
   (at least 4.5:1) on the editor background and on the current-line
   highlight.
 - Secondary text on the pale `#eef2ef` surfaces uses `#5d6864` (5.12:1);
-  the lighter `#66716d` is used for text only on white.
+  the lighter `#66716d` is used for text only on the editor background
+  (4.74:1) and white.
+- All 15 colored ANSI terminal colors reach at least 4.5:1 on the terminal
+  background; only "bright white" is intentionally pale.
 - Input, dropdown, and checkbox borders meet the 3:1 non-text contrast
   requirement.
 - Selected, hovered, and keyboard-focused list items are distinct; keyboard
@@ -69,6 +83,8 @@ ochre at 15%), so overlapping highlights stay visible.
 - The current find match has an ochre outline in addition to its fill.
 - Colors are never the only signal VS Code uses for diff, Git, test, and
   problem states, which also show `+`/`-` markers, letters, or icons.
+- Highlights that come and go (selection, find matches, diff changes) keep
+  every syntax color at 3.5:1 or more while they are shown.
 
 Comments and parameters are italic. If your font has no true italic, or you
 find italics harder to read, turn them off in your user settings:
@@ -100,12 +116,18 @@ find italics harder to read, turn them off in your user settings:
 | Symbolic operators (`=`, `=>`, `+`, `&&`) | Evergreen gray |
 | Word operators (`new`, `typeof`, `and`, `in`) | Accessible ochre |
 | Strings | Forest green |
-| Functions and ordinary variables | Deep evergreen |
-| Types, classes, and markup tags | Forest green |
+| Function and method declarations | Deep evergreen, bold |
+| Function calls and ordinary variables | Deep evergreen |
+| Types, classes, interfaces, built-in types | Slate blue |
+| `this`, `self`, `super`, `cls` | Accessible ochre, italic |
+| Decorators | Accessible ochre |
+| Markup tags (HTML, XML), CSS selectors | Forest green |
+| Attribute names (HTML, XML, JSX) | Accessible ochre |
 | Parameters and JSON/YAML keys | Evergreen gray |
 | Punctuation and structural separators | Muted gray-green |
-| Bracket pairs (nesting levels 1–3) | Accessible ochre, forest green, evergreen gray |
+| Bracket pairs (nesting levels 1–3) | Accessible ochre, muted teal, plum |
 | Markdown inline code | Accessible ochre |
+| Markdown quotes | Evergreen gray, italic |
 | Deprecated symbols (semantic) | Strikethrough |
 | Errors and deleted diff lines | Muted red |
 | Inserted diff lines | Forest green |
@@ -176,7 +198,8 @@ select **Uninstall**.
 
 The examples include HTML, XHTML, XML, JSON, JavaScript, TypeScript, CSS,
 Markdown, Python, Nunjucks, TOML, YAML, LaTeX (`.cls`, `.tex`, and `.sty`),
-dotfiles, and a Git diff.
+dotfiles, and a Git diff. To preview the terminal colors, run
+`sh examples/terminal-colors.sh` in the integrated terminal.
 
 ## Language support
 
