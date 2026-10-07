@@ -22,7 +22,7 @@ jobs:
         run: npm test
 
       - name: Package VSIX
-        run: npx --yes @vscode/vsce@4 package --allow-missing-repository --out verdant-ledger-light.vsix
+        run: npx --yes @vscode/vsce@4 package --out verdant-ledger-light.vsix
 
       - uses: actions/upload-artifact@v4
         with:

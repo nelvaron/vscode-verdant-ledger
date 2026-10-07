@@ -1,6 +1,6 @@
 // The Verdant Ledger Light palette. The validator accepts only these colors,
 // their translucent forms (#rrggbbaa) for palette colors, and the derived
-// tints below. Keep this file in step with the tables in README.md.
+// tints below. Keep this file in step with the tables in DESIGN.md.
 
 export const palette = {
   "#1b2320": "Deep evergreen",

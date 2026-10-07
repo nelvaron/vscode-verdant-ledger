@@ -421,11 +421,16 @@ function validateTheme(entry) {
 }
 
 // ---------------------------------------------------------------------------
-// Documentation: every palette color and tint appears in the README.
+// Documentation: every palette color and tint is described in DESIGN.md,
+// and every palette color appears in the README's palette table.
 
+const design = readFileSync(join(root, "DESIGN.md"), "utf8").toLowerCase();
 const readme = readFileSync(join(root, "README.md"), "utf8").toLowerCase();
 for (const hex of [...Object.keys(palette), ...Object.keys(tints)]) {
-  check(readme.includes(hex), `README.md: ${hex} from scripts/palette.mjs is not documented`);
+  check(design.includes(hex), `DESIGN.md: ${hex} from scripts/palette.mjs is not documented`);
+}
+for (const hex of Object.keys(palette)) {
+  check(readme.includes(hex), `README.md: palette color ${hex} is missing from the palette table`);
 }
 
 // ---------------------------------------------------------------------------

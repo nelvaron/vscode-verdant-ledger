@@ -1,8 +1,11 @@
 .vscode/**
-examples/**
-CLAUDE.md
-.gitignore
-.vscodeignore
-scripts/**
 .github/**
+examples/**
+scripts/**
+images/**
+!images/icon.png
+CONTRIBUTING.md
+DESIGN.md
+.gitignore
 .gitattributes
+.vscodeignore
