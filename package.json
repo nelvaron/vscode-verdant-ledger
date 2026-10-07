@@ -1,16 +1,47 @@
 {
   "name": "verdant-ledger-light",
   "displayName": "Verdant Ledger Light",
-  "description": "A calm, light VS Code theme in forest green, warm ochre, and soft neutrals.",
-  "version": "0.0.1",
-  "publisher": "local",
+  "description": "A calm, low-glare light theme in forest green, warm ochre, and soft neutrals, built to WCAG AA contrast.",
+  "version": "1.0.0",
+  "publisher": "nelvaron",
   "license": "MIT",
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#eef2ef",
+    "theme": "light"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nelvaron/vscode-verdant-ledger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nelvaron/vscode-verdant-ledger/issues"
+  },
+  "homepage": "https://github.com/nelvaron/vscode-verdant-ledger#readme",
+  "pricing": "Free",
   "engines": {
     "vscode": "^1.80.0"
   },
   "categories": [
     "Themes"
   ],
+  "keywords": [
+    "theme",
+    "color theme",
+    "light theme",
+    "light",
+    "green",
+    "forest",
+    "ochre",
+    "calm",
+    "low glare",
+    "accessible",
+    "wcag",
+    "color blind"
+  ],
+  "scripts": {
+    "test": "node scripts/validate.mjs"
+  },
   "contributes": {
     "themes": [
       {

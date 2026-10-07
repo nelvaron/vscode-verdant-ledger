@@ -1,0 +1,11 @@
+/* Intentional problems for previewing warning and error squiggles. */
+
+.empty {}
+
+.typo {
+  colr: #2d6a3b;
+}
+
+.broken {
+  color: ;
+}
