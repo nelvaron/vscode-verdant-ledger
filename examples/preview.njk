@@ -1,0 +1,11 @@
+{% set title = "Verdant Ledger" %}
+<article class="card">
+  <h1>{{ title | title }}</h1>
+  {% if items.length %}
+    {% for item in items %}
+      <a href="{{ item.url }}">{{ item.label }}</a>
+    {% endfor %}
+  {% else %}
+    <p>No entries yet.</p>
+  {% endif %}
+</article>

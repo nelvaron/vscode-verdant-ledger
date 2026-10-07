@@ -1,0 +1,5 @@
+.vscode/**
+examples/**
+CLAUDE.md
+.gitignore
+.vscodeignore

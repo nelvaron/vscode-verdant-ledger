@@ -1,0 +1,12 @@
+title = "Verdant Ledger Light"
+enabled = true
+version = 1
+
+[theme.colors]
+accent = "#2d6a3b"
+surface = "#eef2ef"
+warning = "#8a6408"
+
+[[theme.languages]]
+name = "Python"
+active = true

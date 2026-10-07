@@ -1,0 +1,13 @@
+# VS Code extension packages and test output
+*.vsix
+.vscode-test/
+
+# Node.js dependencies and logs
+node_modules/
+npm-debug.log*
+
+# Operating system and editor artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

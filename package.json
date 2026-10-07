@@ -1,0 +1,23 @@
+{
+  "name": "verdant-ledger-light",
+  "displayName": "Verdant Ledger Light",
+  "description": "A calm, light VS Code theme in forest green, warm ochre, and soft neutrals.",
+  "version": "0.0.1",
+  "publisher": "local",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Verdant Ledger Light",
+        "uiTheme": "vs",
+        "path": "./themes/verdant-ledger-light-color-theme.json"
+      }
+    ]
+  }
+}

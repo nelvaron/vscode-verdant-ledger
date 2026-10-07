@@ -1,0 +1,10 @@
+{
+  "theme": "Verdant Ledger Light",
+  "enabled": true,
+  "version": 1,
+  "palette": {
+    "accent": "#2d6a3b",
+    "surface": "#eef2ef"
+  },
+  "languages": ["json", "typescript", "python"]
+}
