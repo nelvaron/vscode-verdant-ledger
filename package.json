@@ -11,6 +11,9 @@
   "categories": [
     "Themes"
   ],
+  "scripts": {
+    "test": "node scripts/validate.mjs"
+  },
   "contributes": {
     "themes": [
       {

@@ -380,7 +380,7 @@
     "peekViewResult.background": "#eef2ef",
     "peekViewTitle.background": "#e4ebe6",
     "peekViewTitleLabel.foreground": "#1b2320",
-    "peekViewTitleDescription.foreground": "#66716d",
+    "peekViewTitleDescription.foreground": "#5d6864",
     "peekViewResult.selectionBackground": "#2d6a3b33",
     "peekViewResult.selectionForeground": "#1b2320",
     "peekViewResult.matchHighlightBackground": "#b8860b40",

@@ -143,7 +143,8 @@ accent.
 ## Requirements
 
 - Visual Studio Code 1.80.0 or later.
-- Node.js and npm only if you need to build a VSIX package.
+- Node.js 18 or later and npm only if you need to validate the theme or build
+  a VSIX package.
 - Optional language extensions for YAML, Nunjucks, and LaTeX syntax
   highlighting. See [Language support](#language-support).
 
@@ -196,10 +197,47 @@ select **Uninstall**.
 4. Open files from `examples` to preview syntax colors. Use **View: Split
    Editor** to compare samples side by side.
 
-The examples include HTML, XHTML, XML, JSON, JavaScript, TypeScript, CSS,
-Markdown, Python, Nunjucks, TOML, YAML, LaTeX (`.cls`, `.tex`, and `.sty`),
-dotfiles, and a Git diff. To preview the terminal colors, run
-`sh examples/terminal-colors.sh` in the integrated terminal.
+The examples include HTML, XHTML, XML, JSON, JavaScript, JSX, TypeScript,
+CSS, SQL, Markdown, Python, Nunjucks, TOML, YAML, LaTeX (`.cls`, `.tex`, and
+`.sty`), dotfiles, and a Git diff. `diagnostics.ts` and `diagnostics.css`
+contain intentional problems, so you can check how errors, warnings,
+deprecated symbols, and unused variables look. To preview the terminal
+colors, run `sh examples/terminal-colors.sh` in the integrated terminal.
+
+## Validate changes
+
+Run the validator before committing a change to the theme:
+
+```bash
+npm test
+```
+
+It needs no dependencies and checks that:
+
+- the theme and manifest are valid JSON without duplicate keys;
+- every color key is one VS Code knows, using the list in
+  `scripts/vscode-color-ids.json`;
+- every color comes from `scripts/palette.mjs`: a palette color, a
+  translucent form of one, or a documented derived tint;
+- layers VS Code draws over text (selection, find, word highlights, diff,
+  merge) stay translucent;
+- syntax colors reach 4.5:1 on the editor and the current line, and at least
+  3.5:1 under selections, find matches, and diff highlights;
+- interface text reaches 4.5:1, and borders, icons, and indicators 3:1;
+- every palette color and tint is documented in this README.
+
+GitHub Actions runs the same check and builds a VSIX for every pull request
+and every push to `main`. The VSIX is attached to the workflow run as an
+artifact.
+
+To add a color, add it to `scripts/palette.mjs` and to the tables in this
+README. When a new VS Code release adds color keys you want to use, run
+**Developer: Generate Color Theme From Current Settings** in that release,
+save the result, and refresh the list:
+
+```bash
+node scripts/update-color-ids.mjs generated-theme.jsonc 1.141.0
+```
 
 ## Language support
 
@@ -240,6 +278,10 @@ installable extension package while retaining its README and license.
 
 - `themes/verdant-ledger-light-color-theme.json` — workbench and syntax colors.
 - `examples/` — small files for visually reviewing supported syntax.
+- `scripts/validate.mjs` — the validator run by `npm test`.
+- `scripts/palette.mjs` — the palette and derived tints the validator allows.
+- `scripts/vscode-color-ids.json` — color keys known to VS Code.
+- `.github/workflows/validate.yml` — runs the validator and builds a VSIX.
 - `.vscode/launch.json` — Extension Development Host launch configuration.
 - `CLAUDE.md` — project-specific guidance for future Claude-assisted edits.
 - `LICENSE` — MIT License.

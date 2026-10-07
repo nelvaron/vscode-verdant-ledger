@@ -3,3 +3,6 @@ examples/**
 CLAUDE.md
 .gitignore
 .vscodeignore
+scripts/**
+.github/**
+.gitattributes

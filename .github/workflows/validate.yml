@@ -1,0 +1,31 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate theme
+        run: npm test
+
+      - name: Package VSIX
+        run: npx --yes @vscode/vsce@4 package --allow-missing-repository --out verdant-ledger-light.vsix
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verdant-ledger-light-vsix
+          path: verdant-ledger-light.vsix
+          if-no-files-found: error
