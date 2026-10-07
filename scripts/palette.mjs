@@ -9,7 +9,7 @@ export const palette = {
   "#2d6a3b": "Forest green",
   "#b8860b": "Warm ochre",
   "#8a6408": "Accessible ochre",
-  "#a8322a": "Muted red",
+  "#8a2621": "Muted red",
   "#3d5f7a": "Slate blue",
   "#2f6b6b": "Muted teal",
   "#7a4a6e": "Plum",

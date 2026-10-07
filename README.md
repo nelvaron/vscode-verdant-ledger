@@ -20,7 +20,7 @@ language extension; this project does not install language support.
 | `#2d6a3b` | Forest green | Theme accent, strings, markup tags, success |
 | `#b8860b` | Warm ochre | Interface warning accent and modified-file marker |
 | `#8a6408` | Accessible ochre | Keywords, numbers, booleans, warning text |
-| `#a8322a` | Muted red | Errors and deleted content |
+| `#8a2621` | Deep brick red | Errors and deleted content |
 | `#3d5f7a` | Slate blue | Types, classes, interfaces; information messages; terminal blue |
 | `#2f6b6b` | Muted teal | Second bracket level; terminal cyan |
 | `#7a4a6e` | Plum | Third bracket level; terminal magenta |
@@ -81,6 +81,10 @@ ochre at 15%), so overlapping highlights stay visible.
 - Selected, hovered, and keyboard-focused list items are distinct; keyboard
   focus is also shown with a forest green outline.
 - The current find match has an ochre outline in addition to its fill.
+- The red for errors is deliberately darker than the ochre for warnings and
+  the green for additions. With red-green color blindness these hues look
+  alike, so the difference in lightness keeps an error squiggle
+  distinguishable from a warning.
 - Colors are never the only signal VS Code uses for diff, Git, test, and
   problem states, which also show `+`/`-` markers, letters, or icons.
 - Highlights that come and go (selection, find matches, diff changes) keep
