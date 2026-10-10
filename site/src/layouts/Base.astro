@@ -20,9 +20,13 @@ interface Props {
   current?: string;
   /** Path of the page's Markdown version, such as "palette.md". */
   markdown?: string;
+  /** schema.org JSON-LD for the page. */
+  structuredData?: object;
 }
 
-const { title, description, current, markdown } = Astro.props;
+const { title, description, current, markdown, structuredData } = Astro.props;
+// "<" is escaped so no value can close the script element early.
+const jsonLd = structuredData && JSON.stringify(structuredData).replace(/</g, "\\u003c");
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(url("og.png"), Astro.site);
 ---
@@ -52,6 +56,7 @@ const ogImage = new URL(url("og.png"), Astro.site);
     <!-- Mastodon: credit the author on link previews, and verify the site on the profile. -->
     <meta name="fediverse:creator" content="@nelvaron@mastodon.social" />
     <link rel="me" href="https://mastodon.social/@nelvaron" />
+    {jsonLd && <script is:inline type="application/ld+json" set:html={jsonLd} />}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

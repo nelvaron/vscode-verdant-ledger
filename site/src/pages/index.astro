@@ -5,13 +5,15 @@ import CodeSamples from "../components/CodeSamples.astro";
 import screenshot from "../../../images/screenshot-typescript.png";
 import { url } from "../lib/url.js";
 import { links, version, extensionId, figures, paletteEntries, diagnostics } from "../lib/repo.js";
+import { homeStructuredData } from "../lib/structured-data.js";
 import { pages } from "../lib/markdown.js";
 
 const featured = ["#1b2320", "#2d6a3b", "#8a6408", "#3d5f7a", "#2f6b6b", "#7a4a6e", "#8a2621", "#eef2ef"];
 const swatches = featured.map((hex) => paletteEntries.find((entry) => entry.hex === hex));
 const formatNumber = (n) => n.toLocaleString("en-US");
+const structuredData = await homeStructuredData();
 ---
-<Base title={pages.home.title} description={pages.home.description} markdown={pages.home.markdownPath}>
+<Base title={pages.home.title} description={pages.home.description} markdown={pages.home.markdownPath} structuredData={structuredData}>
   <section class="hero ruled">
     <div class="wrap hero-grid">
       <div class="hero-copy stack">

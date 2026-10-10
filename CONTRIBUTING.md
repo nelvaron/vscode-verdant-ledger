@@ -89,7 +89,9 @@ Each page also has a Markdown version for AI agents and other tools
 (`index.md`, `palette.md`), and `llms.txt` lists them. They are built from
 `site/src/lib/markdown.js`. When you change the text of a page, change it there
 too: the build fails if a heading or paragraph of a page is missing from its
-Markdown version.
+Markdown version. The schema.org JSON-LD in each page's head comes from
+`site/src/lib/structured-data.js` and takes its facts from `package.json` and
+`CHANGELOG.md`.
 
 The **Website** workflow rebuilds and deploys the site when anything it reads
 changes on `main`. Pull requests build it as part of **Validate**.
