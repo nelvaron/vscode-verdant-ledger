@@ -1,5 +1,6 @@
 ---
 import { links, version } from "../lib/repo.js";
+import { url } from "../lib/url.js";
 ---
 <footer class="site-footer">
   <div class="wrap footer-row">
@@ -8,6 +9,7 @@ import { links, version } from "../lib/repo.js";
       <li><a href={links.repository}>Source</a></li>
       <li><a href={links.design}>Design notes</a></li>
       <li><a href={links.issues}>Report an issue</a></li>
+      <li><a href={url("llms.txt")}>llms.txt</a></li>
     </ul>
   </div>
 </footer>
