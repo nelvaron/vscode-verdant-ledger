@@ -1,0 +1,379 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import CodeSamples from "../components/CodeSamples.astro";
+import screenshot from "../../../images/screenshot-typescript.png";
+import { url } from "../lib/url.js";
+import { links, version, extensionId, figures, paletteEntries, diagnostics } from "../lib/repo.js";
+
+const featured = ["#1b2320", "#2d6a3b", "#8a6408", "#3d5f7a", "#2f6b6b", "#7a4a6e", "#8a2621", "#eef2ef"];
+const swatches = featured.map((hex) => paletteEntries.find((entry) => entry.hex === hex));
+const formatNumber = (n) => n.toLocaleString("en-US");
+---
+<Base
+  title="Verdant Ledger Light — a calm light theme for VS Code"
+  description="A low-glare Visual Studio Code theme in deep evergreen, forest green and ochre, with every color checked for contrast."
+>
+  <section class="hero ruled">
+    <div class="wrap hero-grid">
+      <div class="hero-copy stack">
+        <p class="eyebrow">Visual Studio Code theme · Light · Free</p>
+        <h1>Calm color for long days in code.</h1>
+        <p class="lede">
+          Verdant Ledger Light is a low-glare theme in deep evergreen, forest green and ochre. Color is kept for
+          meaning, and every pair is checked for contrast.
+        </p>
+        <div class="button-row">
+          <a class="button button-primary" href={links.marketplace}>Install from Marketplace</a>
+          <a class="button button-secondary" href={links.openVsx}>Open VSX</a>
+          <a class="button button-secondary" href={links.releases}>Download VSIX</a>
+        </div>
+        <p class="meta">Version {version} · MIT license · VS Code 1.80+, VSCodium, Cursor, Windsurf</p>
+      </div>
+      <CodeSamples />
+    </div>
+  </section>
+
+  <section aria-labelledby="figures-title" class="figures">
+    <h2 id="figures-title" class="visually-hidden">The theme in figures</h2>
+    <dl class="wrap figures-grid">
+      <div>
+        <dt>minimum contrast for every syntax color on the editor and the current line</dt>
+        <dd>4.5:1</dd>
+      </div>
+      <div>
+        <dt>workbench colors set, so no default blue shows through</dt>
+        <dd>{formatNumber(figures.workbenchColors)}</dd>
+      </div>
+      <div>
+        <dt>automated checks on every change: contrast, palette, known keys</dt>
+        <dd>{formatNumber(figures.checks)}</dd>
+      </div>
+      <div>
+        <dt>terminal colors, each one distinct and readable</dt>
+        <dd>{figures.terminalColors}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="section">
+    <div class="wrap stack">
+      <h2 class="narrow">The whole workbench, in one quiet register.</h2>
+      <Image
+        src={screenshot}
+        alt="VS Code with Verdant Ledger Light: the Explorer and a TypeScript command registry with slate blue types, green strings and ochre keywords"
+        widths={[800, 1400, 2800]}
+        sizes="(max-width: 1248px) calc(100vw - 48px), 1200px"
+        class="screenshot"
+      />
+    </div>
+  </section>
+
+  <section id="features" aria-labelledby="features-title" class="section features-section">
+    <h2 id="features-title" class="visually-hidden">Features</h2>
+    <div class="wrap features">
+      <article>
+        <h3>Calm by design</h3>
+        <p>Most code stays deep evergreen. Ochre marks keywords, forest green marks strings, slate blue marks types. Nothing else competes.</p>
+      </article>
+      <article>
+        <h3>Readable for everyone</h3>
+        <p>WCAG AA text, 3:1 borders and icons, and an error red that stays apart from warnings with red-green color blindness.</p>
+      </article>
+      <article>
+        <h3>Complete</h3>
+        <p>Diff and merge views, debugging, testing, notebooks, the Source Control graph, chat and the terminal all share the palette.</p>
+      </article>
+      <article>
+        <h3>Semantic, not just syntax</h3>
+        <p>Declarations are bold, deprecated symbols are struck through, and <code class="ochre">this</code> and <code class="ochre">self</code> stand out.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="accessibility" class="section ruled bordered">
+    <div class="wrap split">
+      <div class="stack">
+        <p class="eyebrow">Accessibility, measured</p>
+        <h2>An error should never look like a warning.</h2>
+        <p class="muted">
+          With deuteranopia, red and ochre drift toward the same olive. Verdant Ledger’s red is darker than its ochre,
+          so the difference survives as lightness.
+        </p>
+        <a class="text-link" href={url("palette/")}>See the contrast of every color</a>
+      </div>
+      <div class="cvd">
+        <figure>
+          <figcaption>Typical vision</figcaption>
+          <p class="squiggles mono">
+            <span style={`text-decoration-color: ${diagnostics.typical.error}`}>undefinedTotal</span>
+            <span style={`text-decoration-color: ${diagnostics.typical.warning}`}>unusedImport</span>
+          </p>
+        </figure>
+        <figure>
+          <figcaption>Deuteranopia, simulated</figcaption>
+          <p class="squiggles mono">
+            <span style={`text-decoration-color: ${diagnostics.deuteranopia.error}`}>undefinedTotal</span>
+            <span style={`text-decoration-color: ${diagnostics.deuteranopia.warning}`}>unusedImport</span>
+          </p>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap stack">
+      <div class="heading-row">
+        <h2>Fourteen colors, each with a job.</h2>
+        <a class="text-link" href={url("palette/")}>Open the palette ledger</a>
+      </div>
+      <ul class="swatches">
+        {swatches.map((entry) => (
+          <li>
+            <span class="swatch" style={`background: ${entry.hex}`}></span>
+            <span>{entry.name}</span>
+            <span class="mono muted">{entry.hex}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="install" class="section install">
+    <div class="wrap stack">
+      <h2>Install in under a minute.</h2>
+      <ol class="steps">
+        <li>
+          <strong>Open Extensions</strong>
+          <span>Press <kbd>Ctrl+Shift+X</kbd> (<kbd>Cmd+Shift+X</kbd> on macOS).</span>
+        </li>
+        <li>
+          <strong>Search and install</strong>
+          <span>Search for <em>Verdant Ledger Light</em>, or run <code>ext install {extensionId}</code> in Quick Open.</span>
+        </li>
+        <li>
+          <strong>Choose the theme</strong>
+          <span>Run <em>Preferences: Color Theme</em> and pick Verdant Ledger Light.</span>
+        </li>
+      </ol>
+      <div class="button-row">
+        <a class="button button-primary" href={links.marketplace}>Visual Studio Marketplace</a>
+        <a class="button button-secondary" href={links.openVsx}>Open VSX</a>
+        <a class="button button-secondary" href={links.releases}>VSIX from GitHub</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    padding-block: 72px 80px;
+  }
+  .hero-copy {
+    flex: 1 1 400px;
+    min-width: 0;
+    padding-left: 28px;
+    border-left: 4px solid var(--margin-rule);
+  }
+  .hero-grid > :global(.code-window) {
+    flex: 1 1 540px;
+  }
+  .meta {
+    font-size: 0.85rem;
+    color: var(--ink-2);
+  }
+
+  .figures {
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+  .figures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    margin-block: 0;
+  }
+  .figures-grid > div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 28px 24px;
+    border-right: 1px solid var(--rule-soft);
+  }
+  .figures-grid > div:first-child {
+    padding-left: 0;
+  }
+  .figures-grid > div:last-child {
+    border-right: 0;
+  }
+  @media (max-width: 560px) {
+    .figures-grid > div,
+    .figures-grid > div:first-child {
+      padding: 22px 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--rule-soft);
+    }
+    .figures-grid > div:last-child {
+      border-bottom: 0;
+    }
+  }
+  dt {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+  }
+  dd {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .narrow {
+    max-width: 44rem;
+  }
+  .screenshot {
+    width: 100%;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+  }
+
+  .features-section {
+    padding-top: 0;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px 48px;
+  }
+  .features article {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 2px solid var(--ink);
+  }
+  .features p {
+    color: var(--ink-2);
+  }
+  .ochre {
+    color: var(--ochre);
+    font-size: 0.9em;
+  }
+
+  .bordered {
+    border-block: 1px solid var(--rule);
+  }
+  .split {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    align-items: center;
+  }
+  .split > * {
+    flex: 1 1 380px;
+    min-width: 0;
+  }
+  .cvd {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .cvd figure {
+    margin: 0;
+    background: var(--ground);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .cvd figcaption {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .squiggles {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 0.95rem;
+  }
+  .squiggles span {
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
+  }
+
+  .heading-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: end;
+    gap: 16px;
+  }
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .swatches li {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.9rem;
+  }
+  .swatch {
+    height: 64px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 0 1px rgb(27 35 32 / 0.12);
+  }
+
+  .install {
+    background: var(--paper);
+    border-top: 1px solid var(--rule);
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+  .steps li {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    counter-increment: step;
+  }
+  .steps li::before {
+    content: counter(step);
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--ochre);
+  }
+  .steps span {
+    color: var(--ink-2);
+  }
+  .steps code {
+    font-size: 0.85em;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+</style>

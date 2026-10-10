@@ -1,22 +1,23 @@
 // The Verdant Ledger Light palette. The validator accepts only these colors,
 // their translucent forms (#rrggbbaa) for palette colors, and the derived
-// tints below. Keep this file in step with the tables in DESIGN.md.
+// tints below. Keep this file in step with the tables in DESIGN.md; the
+// website reads names and roles from here.
 
 export const palette = {
-  "#1b2320": "Deep evergreen",
-  "#5d6864": "Evergreen gray",
-  "#66716d": "Muted gray-green",
-  "#2d6a3b": "Forest green",
-  "#b8860b": "Warm ochre",
-  "#8a6408": "Accessible ochre",
-  "#8a2621": "Muted red",
-  "#3d5f7a": "Slate blue",
-  "#2f6b6b": "Muted teal",
-  "#7a4a6e": "Plum",
-  "#cfd6d2": "Border gray-green",
-  "#eef2ef": "Pale surface",
-  "#f6f8f6": "Near-white surface",
-  "#ffffff": "White",
+  "#1b2320": { name: "Deep evergreen", role: "Text, variables, functions" },
+  "#5d6864": { name: "Evergreen gray", role: "Parameters, keys, operators, secondary text" },
+  "#66716d": { name: "Muted gray-green", role: "Comments, punctuation, line numbers" },
+  "#2d6a3b": { name: "Forest green", role: "Accent, strings, markup tags, success" },
+  "#8a6408": { name: "Accessible ochre", role: "Keywords, numbers, attributes, warnings" },
+  "#b8860b": { name: "Warm ochre", role: "Modified-file marks, warning badges, find outline" },
+  "#3d5f7a": { name: "Slate blue", role: "Types, classes, interfaces, information" },
+  "#2f6b6b": { name: "Muted teal", role: "Second bracket level, terminal cyan" },
+  "#7a4a6e": { name: "Plum", role: "Third bracket level, terminal magenta" },
+  "#8a2621": { name: "Deep brick red", role: "Errors, deletions, failures" },
+  "#cfd6d2": { name: "Border gray-green", role: "Borders and separators" },
+  "#eef2ef": { name: "Pale surface", role: "Sidebars, tabs, title and status bars" },
+  "#f6f8f6": { name: "Near-white surface", role: "Editor, panel and terminal background" },
+  "#ffffff": { name: "White", role: "Menus, suggestions, inputs, peek editors" },
 };
 
 // Opaque in-between values, each with a single job.

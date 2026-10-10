@@ -1,0 +1,21 @@
+---
+import Base from "../layouts/Base.astro";
+import { url } from "../lib/url.js";
+---
+<Base title="Page not found — Verdant Ledger Light" description="This page does not exist.">
+  <section class="wrap stack missing">
+    <p class="eyebrow">404</p>
+    <h1>This page isn’t in the ledger.</h1>
+    <p class="lede">The address may have changed. The home page has everything about the theme.</p>
+    <div class="button-row">
+      <a class="button button-primary" href={url()}>Go to the home page</a>
+      <a class="button button-secondary" href={url("palette/")}>See the palette</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .missing {
+    padding-block: 96px 120px;
+  }
+</style>

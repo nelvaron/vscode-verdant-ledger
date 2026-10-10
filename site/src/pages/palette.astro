@@ -1,0 +1,221 @@
+---
+import Base from "../layouts/Base.astro";
+import { url } from "../lib/url.js";
+import { paletteEntries, editorBackgroundHex, figures, links } from "../lib/repo.js";
+
+const roles = [
+  { role: "Keywords", sample: "return  if  def", color: "#8a6408" },
+  { role: "Strings", sample: '"terminal"', color: "#2d6a3b" },
+  { role: "Types", sample: "Command  str  number", color: "#3d5f7a" },
+  { role: "Declarations", sample: "register", color: "#1b2320", weight: 700 },
+  { role: "Parameters", sample: "command  args", color: "#5d6864", italic: true },
+  { role: "Comments", sample: "// recede, don't vanish", color: "#66716d", italic: true },
+  { role: "Language variables", sample: "this  self", color: "#8a6408", italic: true },
+  { role: "Errors", sample: "undefinedTotal", color: "#8a2621", squiggle: true },
+];
+const styleFor = (r) =>
+  [
+    `color: ${r.color}`,
+    r.weight ? `font-weight: ${r.weight}` : "",
+    r.italic ? "font-style: italic" : "",
+    r.squiggle ? "text-decoration: underline wavy; text-underline-offset: 4px" : "",
+  ]
+    .filter(Boolean)
+    .join("; ");
+---
+<Base
+  title="Palette ledger — Verdant Ledger Light"
+  description="The fourteen colors of Verdant Ledger Light, with their contrast on the editor background and the job each one does."
+  current="palette"
+>
+  <section class="wrap intro stack">
+    <p class="eyebrow">Palette ledger</p>
+    <h1>Every color is an account with a purpose.</h1>
+    <p class="lede">
+      Contrast is measured against the editor background, <span class="mono">{editorBackgroundHex}</span>. Text needs
+      4.5:1; large marks and icons need 3:1.
+    </p>
+  </section>
+
+  <section class="wrap ledger-section">
+    <div class="table-box" tabindex="0" role="region" aria-labelledby="ledger-caption">
+      <table class="ledger">
+        <caption id="ledger-caption">The {paletteEntries.length} palette colors, in order of use</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="no">No.</th>
+            <th scope="col"><span class="visually-hidden">Swatch</span></th>
+            <th scope="col">Name</th>
+            <th scope="col">Hex</th>
+            <th scope="col" class="num">On editor</th>
+            <th scope="col">Fit for</th>
+            <th scope="col">Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          {paletteEntries.map((entry) => (
+            <tr>
+              <td class="no">{entry.number}</td>
+              <td><span class="chip" style={`background: ${entry.hex}`}></span></td>
+              <th scope="row">{entry.name}</th>
+              <td class="mono">{entry.hex}</td>
+              <td class="num mono">{entry.ratioText}</td>
+              <td><span class={`fit fit-${entry.fit.key}`}>{entry.fit.label}</span></td>
+              <td>{entry.role}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="muted note">
+      Derived tints cover selections, hovers and the bright terminal colors. Each is listed with its job in <a href={links.design}>DESIGN.md</a>.
+    </p>
+  </section>
+
+  <section class="roles-section">
+    <div class="wrap stack">
+      <h2>Same role, same color, in every language.</h2>
+      <dl class="roles">
+        {roles.map((r) => (
+          <div>
+            <dt>{r.role}</dt>
+            <dd><code style={styleFor(r)}>{r.sample}</code></dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="wrap closing">
+    <p class="closing-line">Checked on every change by {figures.checks.toLocaleString("en-US")} automated tests.</p>
+    <a class="text-link" href={links.contributing}>How the checks work</a>
+  </section>
+</Base>
+
+<style>
+  .intro {
+    padding-block: 72px 40px;
+  }
+  .ledger-section {
+    padding-bottom: 72px;
+  }
+  .table-box {
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--paper);
+  }
+  .ledger {
+    width: 100%;
+    min-width: 860px;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+  caption {
+    text-align: left;
+    padding: 14px;
+    color: var(--ink-2);
+  }
+  thead th {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 2px solid var(--ink);
+  }
+  tbody th,
+  td {
+    padding: 0 14px;
+    height: 48px;
+    border-bottom: 1px solid var(--rule-soft);
+    text-align: left;
+    font-weight: 400;
+  }
+  tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+  .no {
+    width: 44px;
+    text-align: right;
+    color: var(--ink-3);
+  }
+  td.no {
+    border-right: 2px solid var(--margin-rule);
+  }
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .chip {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    vertical-align: middle;
+    box-shadow: inset 0 0 0 1px rgb(27 35 32 / 0.15);
+  }
+  .fit {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .fit-text {
+    background: #e5f0e7;
+    color: #245630;
+  }
+  .fit-large {
+    background: #f8edc9;
+    color: #6b4e06;
+  }
+  .fit-surface {
+    background: var(--band);
+    color: var(--ink-2);
+  }
+  .note {
+    margin-top: 16px;
+    font-size: 0.95rem;
+  }
+
+  .roles-section {
+    background: var(--paper);
+    border-block: 1px solid var(--rule);
+    padding-block: 72px;
+  }
+  .roles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 0 40px;
+    margin: 0;
+  }
+  .roles div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .roles dd {
+    margin: 0;
+  }
+
+  .closing {
+    padding-block: 64px 88px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+  .closing-line {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    max-width: 36rem;
+  }
+</style>
