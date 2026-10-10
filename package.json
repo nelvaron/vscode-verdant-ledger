@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/nelvaron/vscode-verdant-ledger/issues"
   },
-  "homepage": "https://github.com/nelvaron/vscode-verdant-ledger#readme",
+  "homepage": "https://nelvaron.github.io/vscode-verdant-ledger/",
   "pricing": "Free",
   "engines": {
     "vscode": "^1.80.0"

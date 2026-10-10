@@ -8,7 +8,8 @@ targets every change must meet.
 ## Requirements
 
 - Visual Studio Code 1.80 or later.
-- Node.js 18 or later, for validation and packaging.
+- Node.js 18 or later, for validation and packaging; 22.12 or later for the
+  website.
 
 ## Preview your changes
 
@@ -62,6 +63,30 @@ npx @vscode/vsce package
 
 This creates `verdant-ledger-light-<version>.vsix`. In VS Code, run
 **Extensions: Install from VSIX...** and select it.
+
+## Website
+
+The website in `site/` is an [Astro](https://astro.build) project published to
+GitHub Pages at <https://nelvaron.github.io/vscode-verdant-ledger/>. It reads
+the theme file, `package.json`, `scripts/palette.mjs`, the example files and
+the validator's check count from the repository, so its colors, code samples
+and figures always match the theme. Code samples are highlighted at build
+time with the theme file itself.
+
+```bash
+cd site
+npm ci
+npm run dev      # http://localhost:4321/vscode-verdant-ledger/
+npm run build    # static files in site/dist
+```
+
+The site needs Node.js 22.12 or later. It is light only and loads no
+third-party resources: fonts are bundled from Fontsource, and the only script
+switches the code sample tabs. `site/public/og.png` is the image shown when
+the site is shared.
+
+The **Website** workflow rebuilds and deploys the site when anything it reads
+changes on `main`. Pull requests build it as part of **Validate**.
 
 ## Release
 
@@ -119,6 +144,14 @@ Open VSX:
 
 4. In the GitHub repository, open **Settings** > **Secrets and variables** >
    **Actions** and add the token as a secret named `OVSX_PAT`.
+
+GitHub Pages:
+
+1. Make the repository public. Pages for private repositories needs a paid
+   GitHub plan.
+2. Open **Settings** > **Pages** and set **Source** to **GitHub Actions**.
+3. Run the **Website** workflow from the **Actions** tab, or push a change to
+   `site/`.
 
 The README images use relative paths. The Marketplace and Open VSX resolve
 them through the repository URL, so they appear only once the repository is

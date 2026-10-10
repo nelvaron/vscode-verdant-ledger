@@ -1,0 +1,42 @@
+---
+import { links, version } from "../lib/repo.js";
+---
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <p>Verdant Ledger Light {version} · <a href={links.license}>MIT license</a> · © 2026 nelvaron</p>
+    <ul>
+      <li><a href={links.repository}>Source</a></li>
+      <li><a href={links.design}>Design notes</a></li>
+      <li><a href={links.issues}>Report an issue</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    background: var(--band);
+    color: var(--ink-2);
+    font-size: 0.9rem;
+  }
+  .footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px 24px;
+    padding-block: 28px;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  a {
+    display: inline-block;
+    padding-block: 8px;
+  }
+</style>

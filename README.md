@@ -4,6 +4,8 @@ A calm, low-glare light theme for Visual Studio Code. Soft green-tinted
 surfaces, deep evergreen text, and a small set of muted accents keep code
 legible through long editing sessions without a crowd of competing colors.
 
+**Website:** [nelvaron.github.io/vscode-verdant-ledger](https://nelvaron.github.io/vscode-verdant-ledger/)
+
 ![TypeScript in Verdant Ledger Light](images/screenshot-typescript.png)
 
 ## Highlights

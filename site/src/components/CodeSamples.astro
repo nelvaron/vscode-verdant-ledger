@@ -1,0 +1,176 @@
+---
+// Code samples highlighted at build time with the theme file itself.
+// Without JavaScript every sample is shown in turn; with it, tabs switch.
+import { Code } from "astro:components";
+import { transformerColorizedBrackets } from "@shikijs/colorized-brackets";
+import { theme, samples, bracketColors } from "../lib/repo.js";
+
+const brackets = transformerColorizedBrackets({ themes: { [theme.name]: bracketColors } });
+---
+<figure class="code-window" data-tabs>
+  <div class="code-bar">
+    <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <div role="tablist" aria-label="Sample language" class="tablist" hidden>
+      {samples.map((sample, index) => (
+        <button
+          type="button"
+          role="tab"
+          id={`tab-${sample.id}`}
+          aria-controls={`panel-${sample.id}`}
+          aria-selected={index === 0 ? "true" : "false"}
+          tabindex={index === 0 ? "0" : "-1"}
+        >
+          {sample.label}
+        </button>
+      ))}
+    </div>
+  </div>
+  {samples.map((sample) => (
+    <section
+      class="code-panel"
+      role="tabpanel"
+      id={`panel-${sample.id}`}
+      aria-labelledby={`tab-${sample.id}`}
+      style={`--first-line: ${sample.firstLine - 1}`}
+    >
+      <p class="file">
+        <span class="mono">examples/{sample.file}</span>
+        {sample.firstLine > 1 && <span> · lines {sample.firstLine}–{sample.firstLine + sample.code.split("\n").length - 1}</span>}
+      </p>
+      <Code code={sample.code} lang={sample.lang} theme={theme} transformers={[brackets]} tabindex="0" />
+    </section>
+  ))}
+  <figcaption>Highlighted with the theme file at build time, so every sample matches the current release.</figcaption>
+</figure>
+
+<script>
+  for (const root of document.querySelectorAll("[data-tabs]")) {
+    const tablist = root.querySelector('[role="tablist"]');
+    const tabs = [...root.querySelectorAll('[role="tab"]')];
+    const panels = tabs.map((tab) => document.getElementById(tab.getAttribute("aria-controls")));
+
+    const select = (index, focus) => {
+      tabs.forEach((tab, i) => {
+        const selected = i === index;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        panels[i].hidden = !selected;
+      });
+      if (focus) tabs[index].focus();
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => select(index, false));
+      tab.addEventListener("keydown", (event) => {
+        const last = tabs.length - 1;
+        const next = { ArrowRight: index + 1, ArrowLeft: index - 1, Home: 0, End: last }[event.key];
+        if (next === undefined) return;
+        event.preventDefault();
+        select((next + tabs.length) % tabs.length, true);
+      });
+    });
+
+    tablist.hidden = false;
+    root.classList.add("is-tabbed");
+    select(0, false);
+  }
+</script>
+
+<style>
+  .code-window {
+    margin: 0;
+    min-width: 0;
+    background: var(--ground);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 18px 40px -24px rgb(27 35 32 / 0.35);
+  }
+  .code-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px 12px;
+    background: var(--band);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 8px 0 16px;
+    min-height: 44px;
+  }
+  .window-dots {
+    display: flex;
+    gap: 6px;
+  }
+  .window-dots i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+  .tablist {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .tablist[hidden] {
+    display: none;
+  }
+  [role="tab"] {
+    font: inherit;
+    font-size: 0.85rem;
+    border: 0;
+    background: transparent;
+    color: var(--ink-2);
+    padding: 10px 12px;
+    min-height: 44px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+  }
+  [role="tab"][aria-selected="true"] {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+  [role="tab"]:hover {
+    color: var(--ink);
+  }
+  .code-panel + .code-panel {
+    border-top: 1px solid var(--rule);
+  }
+  .is-tabbed .code-panel + .code-panel {
+    border-top: 0;
+  }
+  .file {
+    padding: 12px 20px 0;
+    font-size: 0.8rem;
+    color: var(--ink-2);
+  }
+  .code-panel :global(pre) {
+    margin: 0;
+    padding: 12px 20px 20px 0;
+    font-family: var(--font-mono);
+    font-size: 0.86rem;
+    line-height: 1.75;
+    overflow-x: auto;
+  }
+  .code-panel :global(pre code) {
+    counter-reset: line var(--first-line);
+    display: block;
+    min-width: max-content;
+  }
+  .code-panel :global(.line)::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 3.2em;
+    margin-right: 1.2em;
+    text-align: right;
+    color: var(--ink-3);
+    user-select: none;
+  }
+  figcaption {
+    border-top: 1px solid var(--rule);
+    padding: 10px 16px;
+    font-size: 0.82rem;
+    color: var(--ink-2);
+    background: var(--paper);
+  }
+</style>

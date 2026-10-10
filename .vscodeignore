@@ -9,3 +9,4 @@ DESIGN.md
 .gitignore
 .gitattributes
 .vscodeignore
+site/**

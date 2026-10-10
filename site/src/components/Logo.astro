@@ -1,0 +1,16 @@
+---
+// The extension icon, inline so it inherits no external request.
+const { size = 36 } = Astro.props;
+---
+<svg width={size} height={size} viewBox="0 0 256 256" aria-hidden="true" focusable="false">
+  <rect x="10" y="10" width="236" height="236" rx="44" fill="#ffffff" stroke="#cfd6d2" stroke-width="8" />
+  <line x1="66" y1="28" x2="66" y2="228" stroke="#b8860b" stroke-width="10" stroke-linecap="round" />
+  <g stroke-linecap="round" stroke-width="18">
+    <line x1="92" y1="112" x2="118" y2="112" stroke="#8a6408" />
+    <line x1="138" y1="112" x2="190" y2="112" stroke="#1b2320" />
+    <line x1="108" y1="156" x2="148" y2="156" stroke="#3d5f7a" />
+    <line x1="166" y1="156" x2="206" y2="156" stroke="#2d6a3b" />
+    <line x1="108" y1="200" x2="170" y2="200" stroke="#66716d" />
+  </g>
+  <path d="M206 30 C150 30 116 52 112 86 C148 90 192 74 206 30 Z" fill="#2d6a3b" />
+</svg>
