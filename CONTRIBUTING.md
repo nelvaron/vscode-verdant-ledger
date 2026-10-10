@@ -85,6 +85,12 @@ third-party resources: fonts are bundled from Fontsource, and the only script
 switches the code sample tabs. `site/public/og.png` is the image shown when
 the site is shared.
 
+Each page also has a Markdown version for AI agents and other tools
+(`index.md`, `palette.md`), and `llms.txt` lists them. They are built from
+`site/src/lib/markdown.js`. When you change the text of a page, change it there
+too: the build fails if a heading or paragraph of a page is missing from its
+Markdown version.
+
 The **Website** workflow rebuilds and deploys the site when anything it reads
 changes on `main`. Pull requests build it as part of **Validate**.
 

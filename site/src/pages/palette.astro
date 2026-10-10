@@ -2,32 +2,19 @@
 import Base from "../layouts/Base.astro";
 import { url } from "../lib/url.js";
 import { paletteEntries, editorBackgroundHex, figures, links } from "../lib/repo.js";
+import { pages, roles } from "../lib/markdown.js";
 
-const roles = [
-  { role: "Keywords", sample: "return  if  def", color: "#8a6408" },
-  { role: "Strings", sample: '"terminal"', color: "#2d6a3b" },
-  { role: "Types", sample: "Command  str  number", color: "#3d5f7a" },
-  { role: "Declarations", sample: "register", color: "#1b2320", weight: 700 },
-  { role: "Parameters", sample: "command  args", color: "#5d6864", italic: true },
-  { role: "Comments", sample: "// recede, don't vanish", color: "#66716d", italic: true },
-  { role: "Language variables", sample: "this  self", color: "#8a6408", italic: true },
-  { role: "Errors", sample: "undefinedTotal", color: "#8a2621", squiggle: true },
-];
 const styleFor = (r) =>
   [
     `color: ${r.color}`,
-    r.weight ? `font-weight: ${r.weight}` : "",
-    r.italic ? "font-style: italic" : "",
-    r.squiggle ? "text-decoration: underline wavy; text-underline-offset: 4px" : "",
+    r.style === "bold" ? "font-weight: 700" : "",
+    r.style === "italic" ? "font-style: italic" : "",
+    r.style === "wavy underline" ? "text-decoration: underline wavy; text-underline-offset: 4px" : "",
   ]
     .filter(Boolean)
     .join("; ");
 ---
-<Base
-  title="Palette ledger — Verdant Ledger Light"
-  description="The fourteen colors of Verdant Ledger Light, with their contrast on the editor background and the job each one does."
-  current="palette"
->
+<Base title={pages.palette.title} description={pages.palette.description} current="palette" markdown={pages.palette.markdownPath}>
   <section class="wrap intro stack">
     <p class="eyebrow">Palette ledger</p>
     <h1>Every color is an account with a purpose.</h1>

@@ -18,9 +18,11 @@ interface Props {
   title: string;
   description: string;
   current?: string;
+  /** Path of the page's Markdown version, such as "palette.md". */
+  markdown?: string;
 }
 
-const { title, description, current } = Astro.props;
+const { title, description, current, markdown } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(url("og.png"), Astro.site);
 ---
@@ -32,6 +34,8 @@ const ogImage = new URL(url("og.png"), Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {markdown && <link rel="alternate" type="text/markdown" href={url(markdown)} title={`${title} (Markdown)`} />}
+    <link rel="describedby" type="text/markdown" href={url("llms.txt")} />
     <meta name="theme-color" content="#f6f8f6" />
     <link rel="icon" href={iconSvg.src} type="image/svg+xml" />
     <link rel="icon" href={iconPng.src} type="image/png" sizes="256x256" />
