@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { url } from "../lib/url.js";
 import { paletteEntries, editorBackgroundHex, figures, links } from "../lib/repo.js";
+import { paletteStructuredData } from "../lib/structured-data.js";
 import { pages, roles } from "../lib/markdown.js";
 
 const styleFor = (r) =>
@@ -13,8 +14,9 @@ const styleFor = (r) =>
   ]
     .filter(Boolean)
     .join("; ");
+const structuredData = await paletteStructuredData();
 ---
-<Base title={pages.palette.title} description={pages.palette.description} current="palette" markdown={pages.palette.markdownPath}>
+<Base title={pages.palette.title} description={pages.palette.description} current="palette" markdown={pages.palette.markdownPath} structuredData={structuredData}>
   <section class="wrap intro stack">
     <p class="eyebrow">Palette ledger</p>
     <h1>Every color is an account with a purpose.</h1>
