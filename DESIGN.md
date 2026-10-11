@@ -127,6 +127,13 @@ the same color to the eye.
   Bright white is the lightest gray, as programs expect when they print it
   on colored backgrounds, and still readable as text.
 
+VS Code darkens terminal text below `terminal.integrated.minimumContrastRatio`,
+4.5:1 by default. That leaves every theme color alone except bright white,
+which VS Code draws at about 4.5:1, close to white and bright black. A theme
+cannot change the setting, and raising bright white to 4.5:1 would make it
+darker than bright black, so the theme keeps the lighter value; the README
+shows how to turn the adjustment off.
+
 The same palette is used by the
 [Apple Terminal profile](https://github.com/nelvaron/terminal-verdant-ledger).
 

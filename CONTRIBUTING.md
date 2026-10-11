@@ -24,7 +24,9 @@ targets every change must meet.
 `examples/diagnostics.ts` and `examples/diagnostics.css` contain intentional
 problems, so you can check errors, warnings, deprecated symbols, and unused
 variables. To check the terminal colors, run
-`sh examples/terminal-colors.sh` in the integrated terminal.
+`sh examples/terminal-colors.sh` in the integrated terminal. Set
+`"terminal.integrated.minimumContrastRatio": 1` while you do, or VS Code
+darkens bright white to 4.5:1 and it looks like white.
 
 ## Validate
 
