@@ -3,6 +3,13 @@
 All notable changes to Verdant Ledger Light are listed here. The project
 follows [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+- Terminal: each normal ANSI color is now clearly different from its bright
+  version. Normal colors are darker versions of the syntax colors (at least
+  7:1), bright colors are lighter (about 4.6:1), and bright white is the
+  lightest gray (`#7f8a86`). Syntax and interface colors are unchanged.
+
 ## 1.0.0 - 2026-10-07
 
 First public release.

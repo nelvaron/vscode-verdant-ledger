@@ -28,9 +28,9 @@ character. [CONTRIBUTING.md](CONTRIBUTING.md) covers the practical workflow.
 | `#2d6a3b` | Forest green | Theme accent, strings, markup tags, success, additions |
 | `#8a6408` | Accessible ochre | Keywords, numbers, attributes, warnings: any small text in ochre |
 | `#b8860b` | Warm ochre | Larger indicators only: modified-file marks, warning badges, find outline |
-| `#3d5f7a` | Slate blue | Types, classes, interfaces; information messages; terminal blue |
-| `#2f6b6b` | Muted teal | Second bracket level; terminal cyan; graphs |
-| `#7a4a6e` | Plum | Third bracket level; terminal magenta; graphs |
+| `#3d5f7a` | Slate blue | Types, classes, interfaces; information messages |
+| `#2f6b6b` | Muted teal | Second bracket level; graphs |
+| `#7a4a6e` | Plum | Third bracket level; graphs |
 | `#8a2621` | Deep brick red | Errors, deletions, failures |
 | `#cfd6d2` | Border gray-green | Borders and separators |
 | `#eef2ef` | Pale surface | Sidebars, tabs, title and status bars |
@@ -43,7 +43,8 @@ it never carries small text; `#8a6408` does that job at 5.37:1.
 Slate blue, teal, and plum are muted so they sit with the greens and ochres.
 Slate blue separates types from strings and information from success. Teal
 and plum appear only where several things must be told apart at once:
-nested brackets, the terminal, and graphs.
+nested brackets and graphs. The terminal uses darker and lighter versions of
+them, described under [Terminal colors](#terminal-colors).
 
 The red is deliberately darker than the ochre and green. Red, ochre, and
 green look alike with red-green color blindness, and lightness is what still
@@ -59,7 +60,7 @@ a single job.
 | Color | Derived from | Role |
 | --- | --- | --- |
 | `#245630` | Forest green, darker | Button hover, active links, highlighted letters in a focused list item |
-| `#7f8a86` | Muted gray-green, lighter | Input, dropdown, and checkbox borders (3.57:1); bracket match outline; ghost text; quote bar |
+| `#7f8a86` | Muted gray-green, lighter | Input, dropdown, and checkbox borders (3.57:1); bracket match outline; ghost text; quote bar; terminal bright white |
 | `#8c9894` | Muted gray-green, lighter | Decorations only: active indent guide, disabled breakpoint |
 | `#c7d7cb` | 20% forest green over `#eef2ef` | Selected item in lists and trees |
 | `#d5e1d8` | 20% forest green over white | Selected item in menus, Quick Open, and suggestions |
@@ -71,7 +72,8 @@ a single job.
 | `#fcf3f2` | Brick red tint | Error validation and exception backgrounds |
 | `#f8edc9` | Warm ochre tint | Warning validation background |
 | `#ebeff1` | Slate blue tint | Info validation background |
-| `#b8443a` `#3a7d4a` `#8f6809` `#4a6e8e` `#8d5a80` `#367878` | Red, green, ochre, slate, plum, teal | Bright terminal colors (at least 4.67:1) |
+| `#651916` `#236032` `#6f4f01` `#375873` `#744569` `#205d5e` | Brick red, forest green, ochre, slate, plum, teal, darker | Normal terminal colors (at least 7:1) |
+| `#b8443a` `#3a7d4a` `#986702` `#427698` `#9b5b8d` `#267c78` | Brick red, forest green, ochre, slate, plum, teal, lighter | Bright terminal colors (about 4.6:1) |
 
 Layers that VS Code paints on top of each other (selection, find and word
 highlights, diff, merge conflicts) use translucent palette colors such as
@@ -95,6 +97,39 @@ overlapping highlights stay visible.
 | Brackets | Ochre, teal, plum | Nesting visible at a glance |
 | Errors, deletions | Deep brick red | Darker than warnings for color-blind users |
 
+## Terminal colors
+
+The terminal is the one place where a role does not keep its syntax color.
+Programs choose between a normal and a bright version of each ANSI color, and
+both need 4.5:1 on the light background, so they share a narrow band of
+lightness. With the syntax colors as normal colors, yellow and bright yellow
+were only 1.6 CIEDE2000 units apart, and cyan, blue, and magenta 4.7 to 6.2:
+the same color to the eye.
+
+| ANSI color | Normal | Bright | Normal / bright difference (CIEDE2000) |
+| --- | --- | --- | ---: |
+| Black | `#1b2320` (15.04:1) | `#66716d` (4.74:1) | 26.1 |
+| Red | `#651916` (11.55:1) | `#b8443a` (5.01:1) | 19.3 |
+| Green | `#236032` (7.05:1) | `#3a7d4a` (4.67:1) | 10.1 |
+| Yellow | `#6f4f01` (7.04:1) | `#986702` (4.60:1) | 11.2 |
+| Blue | `#375873` (7.01:1) | `#427698` (4.60:1) | 11.0 |
+| Magenta | `#744569` (7.03:1) | `#9b5b8d` (4.60:1) | 11.0 |
+| Cyan | `#205d5e` (7.06:1) | `#267c78` (4.64:1) | 11.0 |
+| White | `#5d6864` (5.42:1) | `#7f8a86` (3.35:1) | 13.5 |
+
+- Normal colors are darker versions of the syntax colors and reach 7:1.
+- Bright colors sit near 4.6:1, stay within a few degrees of the hue of
+  their normal color, and are slightly more saturated.
+- Red is darker still. With deuteranopia, red and ochre differ mainly in
+  lightness; after simulating it, the terminal red and yellow are 12.0 units
+  apart, as far as the syntax red and ochre (11.9).
+- Black, white, bright black, and bright white run from dark to light.
+  Bright white is the lightest gray, as programs expect when they print it
+  on colored backgrounds, and still readable as text.
+
+The same palette is used by the
+[Apple Terminal profile](https://github.com/nelvaron/terminal-verdant-ledger).
+
 ## Accessibility targets
 
 These are enforced by `npm test`:
@@ -104,7 +139,9 @@ These are enforced by `npm test`:
   temporary.
 - Interface text: 4.5:1 on its own background.
 - Borders, icons, and indicators: 3:1.
-- Colored ANSI terminal colors: 4.5:1. Bright white is the only exception.
+- Terminal colors: colored normal colors 7:1, bright colors 4.5:1 and at
+  least 1.5 times lighter than their normal color; bright white 3:1 and
+  lighter than white and bright black; red 1.5 times darker than yellow.
 - Layers VS Code requires to be translucent stay translucent.
 
 ## Changing the theme

@@ -152,7 +152,7 @@ export function paletteMarkdown() {
       ["No.", "Name", "Hex", "On editor", "Fit for", "Role"],
       paletteEntries.map((e) => [e.number, e.name, `\`${e.hex}\``, e.ratioText, e.fit.label, e.role]),
     ),
-    `Derived tints cover selections, hovers and the bright terminal colors. Each is listed with its job in [DESIGN.md](${raw("DESIGN.md")}).`,
+    `Derived tints cover selections, hovers and the terminal colors. Each is listed with its job in [DESIGN.md](${raw("DESIGN.md")}).`,
     "## Same role, same color, in every language.",
     table(
       ["Role", "Sample", "Color", "Style"],

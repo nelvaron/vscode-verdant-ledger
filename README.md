@@ -48,8 +48,8 @@ for VSCodium, Cursor, Windsurf, Gitpod, and other editors that use it.
 | `#8a6408` | Accessible ochre | Keywords, numbers, attributes, warnings |
 | `#b8860b` | Warm ochre | Larger indicators: modified files, warning badges |
 | `#3d5f7a` | Slate blue | Types, classes, interfaces, information |
-| `#2f6b6b` | Muted teal | Second bracket level, terminal cyan |
-| `#7a4a6e` | Plum | Third bracket level, terminal magenta |
+| `#2f6b6b` | Muted teal | Second bracket level, graphs |
+| `#7a4a6e` | Plum | Third bracket level, graphs |
 | `#8a2621` | Deep brick red | Errors and deleted content |
 | `#cfd6d2` | Border gray-green | Borders and separators |
 | `#eef2ef` | Pale surface | Sidebars, tabs, status bar |
@@ -57,7 +57,7 @@ for VSCodium, Cursor, Windsurf, Gitpod, and other editors that use it.
 | `#ffffff` | White | Menus, suggestions, inputs, and other floating widgets |
 
 [DESIGN.md](DESIGN.md) explains the roles in detail and lists the derived
-tints used for selections, hovers, and the bright terminal colors.
+tints used for selections, hovers, and the terminal colors.
 
 ## Syntax colors
 
@@ -96,8 +96,9 @@ tints used for selections, hovers, and the bright terminal colors.
 - Selected, hovered, and keyboard-focused list items look different, and
   keyboard focus is also shown with an outline.
 - The current find match has an outline as well as a fill.
-- All colored terminal colors reach 4.5:1; only "bright white" is pale on
-  purpose.
+- Normal terminal colors reach 7:1 and bright ones 4.5:1, so each bright
+  color is clearly lighter than its normal pair; only "bright white", the
+  lightest gray, is paler (3:1).
 - Errors, warnings, and additions differ in lightness as well as hue, so they
   remain distinguishable with deuteranopia and protanopia.
 

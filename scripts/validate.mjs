@@ -344,12 +344,39 @@ function validateTheme(entry) {
     ["debugConsole.errorForeground", "panel.background"],
     ["terminal.foreground", "terminal.background"],
   ];
-  for (const ansi of ["Black", "Red", "Green", "Yellow", "Blue", "Magenta", "Cyan", "White"]) {
+  const ansiNames = ["Black", "Red", "Green", "Yellow", "Blue", "Magenta", "Cyan", "White"];
+  for (const ansi of ansiNames) {
     text.push([`terminal.ansi${ansi}`, "terminal.background"]);
     // Bright white is the one intentionally pale ANSI color.
     if (ansi !== "White") text.push([`terminal.ansiBright${ansi}`, "terminal.background"]);
   }
   for (const [fg, bg] of text) ratio(fg, bg, 4.5);
+
+  // Terminal colors: normal and bright share the 4.5:1 band on a light
+  // background, so they are told apart by lightness. Colored normal colors
+  // reach 7:1, and each bright color is at least 1.5 times lighter.
+  const terminal = surface("terminal.background");
+  const onTerminal = (key) => contrast(color(key), terminal);
+  for (const ansi of ansiNames.slice(1, 7)) ratio(`terminal.ansi${ansi}`, "terminal.background", 7);
+  for (const ansi of ansiNames) {
+    const normal = onTerminal(`terminal.ansi${ansi}`);
+    const bright = onTerminal(`terminal.ansiBright${ansi}`);
+    check(
+      normal / bright >= 1.5,
+      where(`terminal.ansiBright${ansi} must be clearly lighter than terminal.ansi${ansi}: ${(normal / bright).toFixed(2)}x, needs 1.5x`),
+    );
+  }
+  // Bright white is the lightest gray and stays legible.
+  ratio("terminal.ansiBrightWhite", "terminal.background", 3);
+  for (const gray of ["terminal.ansiWhite", "terminal.ansiBrightBlack"]) {
+    check(onTerminal("terminal.ansiBrightWhite") < onTerminal(gray), where(`terminal.ansiBrightWhite must be lighter than ${gray}`));
+  }
+  // Red stays darker than the ochre, so the two remain apart with red-green
+  // color blindness.
+  check(
+    onTerminal("terminal.ansiRed") / onTerminal("terminal.ansiYellow") >= 1.5,
+    where("terminal.ansiRed must be at least 1.5 times darker than terminal.ansiYellow"),
+  );
 
   // Ghost text is a dismissible preview; it stays visibly fainter than code.
   ratio("editorGhostText.foreground", "editor.background", 3);
