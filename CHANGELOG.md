@@ -3,12 +3,16 @@
 All notable changes to Verdant Ledger Light are listed here. The project
 follows [Semantic Versioning](https://semver.org/).
 
-## Unreleased
+## 1.1.0 - 2026-10-11
 
 - Terminal: each normal ANSI color is now clearly different from its bright
   version. Normal colors are darker versions of the syntax colors (at least
   7:1), bright colors are lighter (about 4.6:1), and bright white is the
   lightest gray (`#7f8a86`). Syntax and interface colors are unchanged.
+- The terminal palette matches the
+  [Apple Terminal profile](https://github.com/nelvaron/terminal-verdant-ledger).
+- README: how to see bright white as designed, since VS Code raises terminal
+  text to 4.5:1 by default.
 
 ## 1.0.0 - 2026-10-07
 

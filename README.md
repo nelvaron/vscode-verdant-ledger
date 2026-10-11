@@ -98,7 +98,8 @@ tints used for selections, hovers, and the terminal colors.
 - The current find match has an outline as well as a fill.
 - Normal terminal colors reach 7:1 and bright ones 4.5:1, so each bright
   color is clearly lighter than its normal pair; only "bright white", the
-  lightest gray, is paler (3:1).
+  lightest gray, is paler (3:1). See
+  [Bright white in the terminal](#bright-white-in-the-terminal).
 - Errors, warnings, and additions differ in lightness as well as hue, so they
   remain distinguishable with deuteranopia and protanopia.
 
@@ -134,6 +135,22 @@ italic, or you find italics harder to read, add this to your user settings:
   }
 }
 ```
+
+### Bright white in the terminal
+
+VS Code darkens terminal text that has less than 4.5:1 contrast
+(`terminal.integrated.minimumContrastRatio`). Bright white is intentionally
+paler, at 3.35:1, so with the default setting VS Code draws it at about 4.5:1,
+close to white and bright black. To see the theme's bright white, lower the
+setting:
+
+```jsonc
+"terminal.integrated.minimumContrastRatio": 1
+```
+
+The setting applies to all terminal text, so VS Code then no longer raises the
+contrast of colors that programs choose for themselves. The theme's own colors
+need no adjustment: every other one reaches 4.5:1.
 
 ## Language support
 
