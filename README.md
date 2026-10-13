@@ -35,6 +35,10 @@ legible through long editing sessions without a crowd of competing colors.
 The theme is also available on [Open VSX](https://open-vsx.org/extension/nelvaron/verdant-ledger-light)
 for VSCodium, Cursor, Windsurf, Gitpod, and other editors that use it.
 
+A matching browser theme for Chrome, Edge, and other Chromium browsers is in
+the [Chrome Web Store](https://chromewebstore.google.com/detail/kpbfkockcbnoncanamgcnbfkiffannln)
+([source](https://github.com/nelvaron/chromium-verdant-ledger)).
+
 ![Python and Markdown side by side](images/screenshot-python-markdown.png)
 
 ## Color palette
