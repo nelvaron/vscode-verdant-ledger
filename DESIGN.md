@@ -135,7 +135,8 @@ darker than bright black, so the theme keeps the lighter value; the README
 shows how to turn the adjustment off.
 
 The same palette is used by the
-[Apple Terminal profile](https://github.com/nelvaron/terminal-verdant-ledger).
+[Apple Terminal profile](https://github.com/nelvaron/terminal-verdant-ledger)
+and the [Chrome and Edge theme](https://github.com/nelvaron/chromium-verdant-ledger).
 
 ## Accessibility targets
 
