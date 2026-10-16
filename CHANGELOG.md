@@ -3,6 +3,21 @@
 All notable changes to Verdant Ledger Light are listed here. The project
 follows [Semantic Versioning](https://semver.org/).
 
+## 1.2.0 - 2026-10-16
+
+- Color vision: the second and third bracket levels and the teal and plum
+  Source Control graph lanes now differ in lightness, so they stay apart with
+  deuteranopia (10.3 CIEDE2000 units after simulation, was 2.5). Muted teal is
+  now `#367878` and plum `#6a3b5f`; with normal vision the change is slight.
+- The darker plum also separates the plum and slate blue graph lanes with
+  protanopia (8.5, was 3.6).
+- Terminal: normal magenta is darker (`#4d2e45`), so it stays apart from cyan
+  with deuteranopia (7.9, was 2.7). Bright magenta and cyan are unchanged.
+- `npm test` now checks these pairs, and the error and warning colors, after
+  simulating deuteranopia and protanopia.
+- New `ACCESSIBILITY.md` with what is tested, the known barriers, and how to
+  report one.
+
 ## 1.1.0 - 2026-10-11
 
 - Terminal: each normal ANSI color is now clearly different from its bright

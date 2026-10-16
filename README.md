@@ -52,8 +52,8 @@ the [Chrome Web Store](https://chromewebstore.google.com/detail/kpbfkockcbnoncan
 | `#8a6408` | Accessible ochre | Keywords, numbers, attributes, warnings |
 | `#b8860b` | Warm ochre | Larger indicators: modified files, warning badges |
 | `#3d5f7a` | Slate blue | Types, classes, interfaces, information |
-| `#2f6b6b` | Muted teal | Second bracket level, graphs |
-| `#7a4a6e` | Plum | Third bracket level, graphs |
+| `#367878` | Muted teal | Second bracket level, graphs |
+| `#6a3b5f` | Plum | Third bracket level, graphs |
 | `#8a2621` | Deep brick red | Errors and deleted content |
 | `#cfd6d2` | Border gray-green | Borders and separators |
 | `#eef2ef` | Pale surface | Sidebars, tabs, status bar |
@@ -105,7 +105,8 @@ tints used for selections, hovers, and the terminal colors.
   lightest gray, is paler (3:1). See
   [Bright white in the terminal](#bright-white-in-the-terminal).
 - Errors, warnings, and additions differ in lightness as well as hue, so they
-  remain distinguishable with deuteranopia and protanopia.
+  remain distinguishable with deuteranopia and protanopia. So do the three
+  bracket levels and the Source Control graph lanes.
 
 [ACCESSIBILITY.md](ACCESSIBILITY.md) lists what is tested, the known barriers,
 and how to report a new one.

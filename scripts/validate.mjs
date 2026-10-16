@@ -6,7 +6,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { contrast, over } from "./color.mjs";
+import { contrast, over, simulate, deltaE2000, DEUTERANOPIA, PROTANOPIA } from "./color.mjs";
 import { palette, tints } from "./palette.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -377,6 +377,31 @@ function validateTheme(entry) {
     onTerminal("terminal.ansiRed") / onTerminal("terminal.ansiYellow") >= 1.5,
     where("terminal.ansiRed must be at least 1.5 times darker than terminal.ansiYellow"),
   );
+
+  // Color vision: colors that tell things apart by color alone stay at least
+  // 7 CIEDE2000 units apart after simulating deuteranopia and protanopia.
+  // The bright terminal magenta and cyan are left out: both sit near 4.5:1,
+  // so they cannot differ much in lightness (see ACCESSIBILITY.md).
+  const distinct = [
+    ["editorError.foreground", "editorWarning.foreground"],
+    ["terminal.ansiMagenta", "terminal.ansiCyan"],
+  ];
+  const groups = [
+    ["editorBracketHighlight.foreground1", "editorBracketHighlight.foreground2", "editorBracketHighlight.foreground3"],
+    ["scmGraph.foreground1", "scmGraph.foreground2", "scmGraph.foreground3", "scmGraph.foreground4", "scmGraph.foreground5"],
+  ];
+  for (const keys of groups) {
+    keys.forEach((a, i) => keys.slice(i + 1).forEach((b) => distinct.push([a, b])));
+  }
+  for (const [a, b] of distinct) {
+    for (const [name, matrix] of [["deuteranopia", DEUTERANOPIA], ["protanopia", PROTANOPIA]]) {
+      const difference = deltaE2000(simulate(color(a), matrix), simulate(color(b), matrix));
+      check(
+        difference >= 7,
+        where(`${a} and ${b} look alike with ${name}: ${difference.toFixed(1)} CIEDE2000, needs 7`),
+      );
+    }
+  }
 
   // Ghost text is a dismissible preview; it stays visibly fainter than code.
   ratio("editorGhostText.foreground", "editor.background", 3);

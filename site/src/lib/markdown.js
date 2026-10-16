@@ -72,7 +72,7 @@ function head(page) {
 export async function homeMarkdown() {
   const page = pages.home;
   const image = await getImage({ src: screenshot, width: 1400 });
-  const featured = ["#1b2320", "#2d6a3b", "#8a6408", "#3d5f7a", "#2f6b6b", "#7a4a6e", "#8a2621", "#eef2ef"];
+  const featured = ["#1b2320", "#2d6a3b", "#8a6408", "#3d5f7a", "#367878", "#6a3b5f", "#8a2621", "#eef2ef"];
 
   return join(
     head(page),
