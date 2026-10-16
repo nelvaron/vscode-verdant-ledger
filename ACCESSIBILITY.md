@@ -45,7 +45,10 @@ VS Code's keyboard behavior, focus order, or accessibility settings.
   request.
 - **Color blindness:** the error, warning, and success colors were compared
   after simulating deuteranopia and protanopia (Machado, Oliveira and
-  Fernandes, 2009) with the CIEDE2000 color difference.
+  Fernandes, 2009) with the CIEDE2000 color difference. The palette colors
+  and terminal colors were also compared with each other after simulating
+  deuteranopia; the colored pairs that come closest are listed under Known
+  barriers.
 - **Website:** checked with axe-core (WCAG 2.2 A and AA rules) with no
   violations, by keyboard alone, at 390 px width, and with
   `prefers-reduced-motion`. It has a skip link, one `main` landmark, a
@@ -69,6 +72,12 @@ VS Code's keyboard behavior, focus order, or accessibility settings.
   Code's default `terminal.integrated.minimumContrastRatio` of 4.5, VS Code
   raises it to about 4.5:1 for you. See
   [Bright white in the terminal](README.md#bright-white-in-the-terminal).
+- **Teal and plum look alike with deuteranopia.** After simulating it, the
+  muted teal and plum used for the second and third bracket levels and for
+  two Source Control graph lanes are only 2.5 CIEDE2000 units apart. The
+  terminal's magenta and cyan are 2.7 apart (5.1 for the bright pair). The
+  bracket match outline and the graph's lines still show what belongs
+  together, but color alone does not separate these pairs.
 - **Modified-file marks on inactive tabs.** The warm ochre border that marks
   unsaved changes reaches 3:1 on the active tab but only about 1.8:1 on
   inactive tabs, where it is dimmed on purpose. VS Code also shows a dot on
