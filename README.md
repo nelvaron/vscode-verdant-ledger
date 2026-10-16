@@ -107,6 +107,9 @@ tints used for selections, hovers, and the terminal colors.
 - Errors, warnings, and additions differ in lightness as well as hue, so they
   remain distinguishable with deuteranopia and protanopia.
 
+[ACCESSIBILITY.md](ACCESSIBILITY.md) lists what is tested, the known barriers,
+and how to report a new one.
+
 ### Turn off italics
 
 Comments, parameters, and `this`/`self` are italic. If your font has no true

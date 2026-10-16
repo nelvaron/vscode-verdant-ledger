@@ -3,7 +3,8 @@
 Thank you for helping. Bug reports, screenshots of colors that look wrong in
 a language, and pull requests are all welcome. Read [DESIGN.md](DESIGN.md)
 first: it explains the palette, the role of each color, and the contrast
-targets every change must meet.
+targets every change must meet. [ACCESSIBILITY.md](ACCESSIBILITY.md) lists
+the known barriers and how accessibility issues are reported.
 
 ## Requirements
 
