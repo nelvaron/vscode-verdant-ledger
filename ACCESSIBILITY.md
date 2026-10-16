@@ -43,12 +43,12 @@ VS Code's keyboard behavior, focus order, or accessibility settings.
   layers VS Code paints on top of each other stay translucent, so overlapping
   highlights remain visible. The **Validate** workflow runs it on every pull
   request.
-- **Color blindness:** the error, warning, and success colors were compared
-  after simulating deuteranopia and protanopia (Machado, Oliveira and
-  Fernandes, 2009) with the CIEDE2000 color difference. The palette colors
-  and terminal colors were also compared with each other after simulating
-  deuteranopia; the colored pairs that come closest are listed under Known
-  barriers.
+- **Color blindness:** `npm test` simulates deuteranopia and protanopia
+  (Machado, Oliveira and Fernandes, 2009) and requires a CIEDE2000 difference
+  of at least 7 between the error and warning colors, the three bracket
+  levels, the five Source Control graph lanes, and the normal terminal
+  magenta and cyan. The one colored pair that comes closer is listed under
+  Known barriers.
 - **Website:** checked with axe-core (WCAG 2.2 A and AA rules) with no
   violations, by keyboard alone, at 390 px width, and with
   `prefers-reduced-motion`. It has a skip link, one `main` landmark, a
@@ -72,12 +72,13 @@ VS Code's keyboard behavior, focus order, or accessibility settings.
   Code's default `terminal.integrated.minimumContrastRatio` of 4.5, VS Code
   raises it to about 4.5:1 for you. See
   [Bright white in the terminal](README.md#bright-white-in-the-terminal).
-- **Teal and plum look alike with deuteranopia.** After simulating it, the
-  muted teal and plum used for the second and third bracket levels and for
-  two Source Control graph lanes are only 2.5 CIEDE2000 units apart. The
-  terminal's magenta and cyan are 2.7 apart (5.1 for the bright pair). The
-  bracket match outline and the graph's lines still show what belongs
-  together, but color alone does not separate these pairs.
+- **Bright magenta and bright cyan in the terminal look alike with
+  deuteranopia** (5.1 CIEDE2000 units apart after simulating it). Both bright
+  colors sit near 4.6:1, so they cannot differ much in lightness without
+  breaking the rule that bright colors are clearly lighter than normal ones.
+  The normal magenta and cyan are 7.9 apart. Version 1.2.0 fixed the same
+  problem for the teal and plum of the bracket levels and graph lanes, which
+  were 2.5 apart and are now 10.3.
 - **Modified-file marks on inactive tabs.** The warm ochre border that marks
   unsaved changes reaches 3:1 on the active tab but only about 1.8:1 on
   inactive tabs, where it is dimmed on purpose. VS Code also shows a dot on
@@ -120,4 +121,4 @@ The theme and this page are maintained by
 [@nelvaron](https://github.com/nelvaron). This page is reviewed with every
 release, and whenever a known barrier is fixed or a new one is found.
 
-Last reviewed: 16 October 2026, for version 1.1.0.
+Last reviewed: 16 October 2026, for version 1.2.0.

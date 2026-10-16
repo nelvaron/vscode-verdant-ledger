@@ -29,8 +29,8 @@ character. [CONTRIBUTING.md](CONTRIBUTING.md) covers the practical workflow.
 | `#8a6408` | Accessible ochre | Keywords, numbers, attributes, warnings: any small text in ochre |
 | `#b8860b` | Warm ochre | Larger indicators only: modified-file marks, warning badges, find outline |
 | `#3d5f7a` | Slate blue | Types, classes, interfaces; information messages |
-| `#2f6b6b` | Muted teal | Second bracket level; graphs |
-| `#7a4a6e` | Plum | Third bracket level; graphs |
+| `#367878` | Muted teal | Second bracket level; graphs |
+| `#6a3b5f` | Plum | Third bracket level; graphs |
 | `#8a2621` | Deep brick red | Errors, deletions, failures |
 | `#cfd6d2` | Border gray-green | Borders and separators |
 | `#eef2ef` | Pale surface | Sidebars, tabs, title and status bars |
@@ -45,6 +45,14 @@ Slate blue separates types from strings and information from success. Teal
 and plum appear only where several things must be told apart at once:
 nested brackets and graphs. The terminal uses darker and lighter versions of
 them, described under [Terminal colors](#terminal-colors).
+
+Teal and plum differ in lightness as well as hue: teal is the lighter of the
+two (4.57:1 on the current line), plum the darker (7.82:1). With deuteranopia
+the two hues look alike, so lightness is what keeps the second and third
+bracket levels apart. After simulating it they are 10.3 CIEDE2000 units apart;
+the earlier `#2f6b6b` and `#7a4a6e`, at almost the same lightness, managed only
+2.5. The darker plum also stays apart from slate blue in the Source Control
+graph with protanopia (8.5, where the earlier plum managed 3.6).
 
 The red is deliberately darker than the ochre and green. Red, ochre, and
 green look alike with red-green color blindness, and lightness is what still
@@ -72,7 +80,7 @@ a single job.
 | `#fcf3f2` | Brick red tint | Error validation and exception backgrounds |
 | `#f8edc9` | Warm ochre tint | Warning validation background |
 | `#ebeff1` | Slate blue tint | Info validation background |
-| `#651916` `#236032` `#6f4f01` `#375873` `#744569` `#205d5e` | Brick red, forest green, ochre, slate, plum, teal, darker | Normal terminal colors (at least 7:1) |
+| `#651916` `#236032` `#6f4f01` `#375873` `#4d2e45` `#205d5e` | Brick red, forest green, ochre, slate, plum, teal, darker | Normal terminal colors (at least 7:1) |
 | `#b8443a` `#3a7d4a` `#986702` `#427698` `#9b5b8d` `#267c78` | Brick red, forest green, ochre, slate, plum, teal, lighter | Bright terminal colors (about 4.6:1) |
 
 Layers that VS Code paints on top of each other (selection, find and word
@@ -113,7 +121,7 @@ the same color to the eye.
 | Green | `#236032` (7.05:1) | `#3a7d4a` (4.67:1) | 10.1 |
 | Yellow | `#6f4f01` (7.04:1) | `#986702` (4.60:1) | 11.2 |
 | Blue | `#375873` (7.01:1) | `#427698` (4.60:1) | 11.0 |
-| Magenta | `#744569` (7.03:1) | `#9b5b8d` (4.60:1) | 11.0 |
+| Magenta | `#4d2e45` (10.98:1) | `#9b5b8d` (4.60:1) | 21.3 |
 | Cyan | `#205d5e` (7.06:1) | `#267c78` (4.64:1) | 11.0 |
 | White | `#5d6864` (5.42:1) | `#7f8a86` (3.35:1) | 13.5 |
 
@@ -123,6 +131,10 @@ the same color to the eye.
 - Red is darker still. With deuteranopia, red and ochre differ mainly in
   lightness; after simulating it, the terminal red and yellow are 12.0 units
   apart, as far as the syntax red and ochre (11.9).
+- Magenta is darker still, for the same reason: cyan cannot get lighter
+  without dropping below 7:1, so magenta moves away from it in lightness.
+  After simulating deuteranopia the two are 7.9 units apart, where they were
+  2.7. The bright magenta and cyan both sit near 4.6:1 and stay closer (5.1).
 - Black, white, bright black, and bright white run from dark to light.
   Bright white is the lightest gray, as programs expect when they print it
   on colored backgrounds, and still readable as text.
@@ -150,6 +162,10 @@ These are enforced by `npm test`:
 - Terminal colors: colored normal colors 7:1, bright colors 4.5:1 and at
   least 1.5 times lighter than their normal color; bright white 3:1 and
   lighter than white and bright black; red 1.5 times darker than yellow.
+- Color vision: after simulating deuteranopia and protanopia, the error and
+  warning colors, the three bracket levels, the five Source Control graph
+  lanes, and the normal terminal magenta and cyan stay at least 7 CIEDE2000
+  units apart.
 - Layers VS Code requires to be translucent stay translucent.
 
 ## Changing the theme
