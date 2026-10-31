@@ -38,14 +38,16 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      # The oldest Node the site supports (engines in site/package.json), so a
+      # dependency that needs a newer one fails here instead of for contributors.
       - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 22.19.0
           cache: npm
           cache-dependency-path: site/package-lock.json
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --engine-strict
 
       - name: Build site
         run: npm run build
