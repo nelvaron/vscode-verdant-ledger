@@ -4,6 +4,7 @@ examples/**
 scripts/**
 images/**
 !images/icon.png
+ACCESSIBILITY.md
 CONTRIBUTING.md
 DESIGN.md
 .gitignore

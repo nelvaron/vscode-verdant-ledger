@@ -5,7 +5,7 @@
 import { getImage } from "astro:assets";
 import screenshot from "../../../images/screenshot-typescript.png";
 import changelog from "../../../CHANGELOG.md?raw";
-import { manifest, version, links } from "./repo.js";
+import { manifest, version, vscodeVersion, links } from "./repo.js";
 import { absolute, pages } from "./markdown.js";
 
 const home = absolute();
@@ -20,8 +20,6 @@ const releases = [...changelog.matchAll(/^## (\S+) - (\d{4}-\d{2}-\d{2})$/gm)].m
 const datePublished = releases.at(-1)?.date;
 const dateModified = releases.find((release) => release.v === version)?.date;
 
-const engine = manifest.engines.vscode.replace(/^\^/, "").replace(/\.0$/, "");
-
 async function theme() {
   const image = await getImage({ src: screenshot, width: 1400 });
   return {
@@ -33,7 +31,7 @@ async function theme() {
     applicationCategory: "DeveloperApplication",
     applicationSubCategory: "Visual Studio Code color theme",
     operatingSystem: "Windows, macOS, Linux",
-    softwareRequirements: `Visual Studio Code ${engine} or later, or an editor that installs from Open VSX`,
+    softwareRequirements: `Visual Studio Code ${vscodeVersion} or later, or an editor that installs from Open VSX`,
     softwareVersion: version,
     datePublished,
     dateModified,

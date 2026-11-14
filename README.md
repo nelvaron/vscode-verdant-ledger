@@ -100,7 +100,7 @@ tints used for selections, hovers, and the terminal colors.
 - Selected, hovered, and keyboard-focused list items look different, and
   keyboard focus is also shown with an outline.
 - The current find match has an outline as well as a fill.
-- Normal terminal colors reach 7:1 and bright ones 4.5:1, so each bright
+- Colored normal terminal colors reach 7:1 and bright ones 4.5:1, so each bright
   color is clearly lighter than its normal pair; only "bright white", the
   lightest gray, is paler (3:1). See
   [Bright white in the terminal](#bright-white-in-the-terminal).
@@ -125,6 +125,9 @@ italic, or you find italics harder to read, add this to your user settings:
           "comment",
           "punctuation.definition.comment",
           "variable.parameter",
+          "variable.parameter.js",
+          "variable.parameter.ts",
+          "variable.parameter.function.language.special",
           "variable.language",
           "markup.quote"
         ],

@@ -14,6 +14,7 @@ on:
       - "examples/**"
       - "images/**"
       - "package.json"
+      - "CHANGELOG.md"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 

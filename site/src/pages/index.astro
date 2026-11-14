@@ -4,12 +4,10 @@ import Base from "../layouts/Base.astro";
 import CodeSamples from "../components/CodeSamples.astro";
 import screenshot from "../../../images/screenshot-typescript.png";
 import { url } from "../lib/url.js";
-import { links, version, extensionId, figures, paletteEntries, diagnostics } from "../lib/repo.js";
+import { links, version, vscodeVersion, extensionId, figures, featuredEntries, diagnostics } from "../lib/repo.js";
 import { homeStructuredData } from "../lib/structured-data.js";
 import { pages } from "../lib/markdown.js";
 
-const featured = ["#1b2320", "#2d6a3b", "#8a6408", "#3d5f7a", "#367878", "#6a3b5f", "#8a2621", "#eef2ef"];
-const swatches = featured.map((hex) => paletteEntries.find((entry) => entry.hex === hex));
 const formatNumber = (n) => n.toLocaleString("en-US");
 const structuredData = await homeStructuredData();
 ---
@@ -28,7 +26,7 @@ const structuredData = await homeStructuredData();
           <a class="button button-secondary" href={links.openVsx}>Open VSX</a>
           <a class="button button-secondary" href={links.releases}>Download VSIX</a>
         </div>
-        <p class="meta">Version {version} · MIT license · VS Code 1.80+, VSCodium, Cursor, Windsurf</p>
+        <p class="meta">Version {version} · MIT license · VS Code {vscodeVersion}+, VSCodium, Cursor, Windsurf</p>
       </div>
       <CodeSamples />
     </div>
@@ -128,7 +126,7 @@ const structuredData = await homeStructuredData();
         <a class="text-link" href={url("palette/")}>Open the palette ledger</a>
       </div>
       <ul class="swatches">
-        {swatches.map((entry) => (
+        {featuredEntries.map((entry) => (
           <li>
             <span class="swatch" style={`background: ${entry.hex}`}></span>
             <span>{entry.name}</span>

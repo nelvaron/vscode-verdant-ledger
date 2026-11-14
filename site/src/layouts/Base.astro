@@ -22,9 +22,11 @@ interface Props {
   markdown?: string;
   /** schema.org JSON-LD for the page. */
   structuredData?: object;
+  /** For pages with no address of their own, such as 404: no canonical URL, not indexed. */
+  noindex?: boolean;
 }
 
-const { title, description, current, markdown, structuredData } = Astro.props;
+const { title, description, current, markdown, structuredData, noindex = false } = Astro.props;
 // "<" is escaped so no value can close the script element early.
 const jsonLd = structuredData && JSON.stringify(structuredData).replace(/</g, "\\u003c");
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -37,7 +39,7 @@ const ogImage = new URL(url("og.png"), Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     {markdown && <link rel="alternate" type="text/markdown" href={url(markdown)} title={`${title} (Markdown)`} />}
     <link rel="describedby" type="text/markdown" href={url("llms.txt")} />
     <meta name="theme-color" content="#f6f8f6" />
@@ -47,7 +49,7 @@ const ogImage = new URL(url("og.png"), Astro.site);
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {!noindex && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />

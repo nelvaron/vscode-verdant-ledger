@@ -9,8 +9,8 @@ the known barriers and how accessibility issues are reported.
 ## Requirements
 
 - Visual Studio Code 1.80 or later.
-- Node.js 18 or later, for validation and packaging; 22.19 or later for the
-  website.
+- Node.js 18 or later for validation, 22 or later for packaging, and 22.19 or
+  later for the website.
 
 ## Preview your changes
 
@@ -44,6 +44,8 @@ The validator has no dependencies. It checks that:
 - layers VS Code draws over text stay translucent;
 - syntax colors, interface text, borders, icons, and terminal colors meet
   the contrast targets in DESIGN.md;
+- colors that are told apart by color alone stay apart after simulating
+  deuteranopia and protanopia;
 - every palette color and tint is documented in DESIGN.md, and every palette
   color in the README.
 
