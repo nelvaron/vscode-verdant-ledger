@@ -6,7 +6,7 @@ import { getImage } from "astro:assets";
 import screenshot from "../../../images/screenshot-typescript.png";
 import changelog from "../../../CHANGELOG.md?raw";
 import { manifest, version, vscodeVersion, links } from "./repo.js";
-import { absolute, pages } from "./markdown.js";
+import { absolute, pages, features } from "./markdown.js";
 
 const home = absolute();
 const ids = {
@@ -42,12 +42,7 @@ async function theme() {
     downloadUrl: links.releases,
     image: absolute("og.png"),
     screenshot: new URL(image.src, import.meta.env.SITE).href,
-    featureList: [
-      "Calm by design: most code stays deep evergreen; ochre marks keywords, forest green marks strings, slate blue marks types.",
-      "Readable for everyone: WCAG AA text, 3:1 borders and icons, and an error red that stays apart from warnings with red-green color blindness.",
-      "Complete: diff and merge views, debugging, testing, notebooks, the Source Control graph, chat and the terminal all share the palette.",
-      "Semantic highlighting: declarations are bold, deprecated symbols are struck through, and this and self stand out.",
-    ],
+    featureList: features.map((feature) => `${feature.title}: ${feature.text.replaceAll("`", "")}`),
     keywords: manifest.keywords.join(", "),
     author: { "@id": ids.author },
     publisher: { "@id": ids.author },
