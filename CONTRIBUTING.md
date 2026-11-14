@@ -41,6 +41,7 @@ The validator has no dependencies. It checks that:
 - every color key is one VS Code knows (`scripts/vscode-color-ids.json`);
 - every color comes from `scripts/palette.mjs`: a palette color, a
   translucent form of one, or a documented derived tint;
+- no syntax rule repeats a more general one;
 - layers VS Code draws over text stay translucent;
 - syntax colors, interface text, borders, icons, and terminal colors meet
   the contrast targets in DESIGN.md;
@@ -115,7 +116,8 @@ Maintainers release by pushing a version tag:
    ```
 
 The **Release** workflow validates the theme, checks that the tag matches
-`package.json`, builds the VSIX, creates a GitHub release with the VSIX and
+`package.json` and that `CHANGELOG.md` has a section for the version, builds
+the VSIX, creates a GitHub release with the VSIX and
 the changelog section, and publishes to Open VSX when the `OVSX_PAT` secret
 is set.
 

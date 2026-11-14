@@ -34,6 +34,21 @@ jobs:
           echo "VERSION=$version" >> "$GITHUB_ENV"
           echo "VSIX=verdant-ledger-light-$version.vsix" >> "$GITHUB_ENV"
 
+      # Written outside the checkout, so it cannot end up in the VSIX.
+      - name: Read the release notes from CHANGELOG.md
+        run: |
+          notes="$RUNNER_TEMP/release-notes.md"
+          awk -v v="$VERSION" '
+            $0 ~ "^## " v "( |$)" { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGELOG.md > "$notes"
+          if ! grep -q '[^[:space:]]' "$notes"; then
+            echo "::error::CHANGELOG.md has no section for $VERSION. Add \"## $VERSION - <date>\" with the changes."
+            exit 1
+          fi
+          echo "NOTES=$notes" >> "$GITHUB_ENV"
+
       - name: Package VSIX
         run: npx --yes @vscode/vsce@4 package --out "$VSIX"
 
@@ -41,14 +56,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          awk -v v="$VERSION" '
-            $0 ~ "^## " v "( |$)" { found = 1; next }
-            found && /^## / { exit }
-            found { print }
-          ' CHANGELOG.md > release-notes.md
           gh release create "$GITHUB_REF_NAME" "$VSIX" \
             --title "Verdant Ledger Light $VERSION" \
-            --notes-file release-notes.md
+            --notes-file "$NOTES"
 
       - name: Publish to Open VSX
         env:
