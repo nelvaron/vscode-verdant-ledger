@@ -68,13 +68,13 @@ a single job.
 | Color | Derived from | Role |
 | --- | --- | --- |
 | `#245630` | Forest green, darker | Button hover, active links, highlighted letters in a focused list item |
-| `#7f8a86` | Muted gray-green, lighter | Input, dropdown, and checkbox borders (3.57:1); bracket match outline; ghost text; quote bar; terminal bright white |
+| `#7f8a86` | Muted gray-green, lighter | Input, dropdown, and checkbox borders (3.57:1); bracket match outline; ghost text; quote bar; default terminal command mark; terminal bright white |
 | `#8c9894` | Muted gray-green, lighter | Decorations only: active indent guide, disabled breakpoint |
 | `#c7d7cb` | 20% forest green over `#eef2ef` | Selected item in lists and trees |
 | `#d5e1d8` | 20% forest green over white | Selected item in menus, Quick Open, and suggestions |
-| `#dce8df` | Forest green tint | Inactive list selection, badges, menu bar |
+| `#dce8df` | Forest green tint | Inactive and focused list items, badges, menu bar, status bar and secondary button hover |
 | `#dfe7e1` | Forest green tint | List hover |
-| `#e4ebe6` | Forest green tint | Tab and button hover |
+| `#e4ebe6` | Forest green tint | Tab hover, secondary buttons, peek view title |
 | `#e4e9e6` | Border gray-green, lighter | Indent guides and rulers |
 | `#f0f3f1` | Pale surface, lighter | Current line (comments stay at 4.53:1) |
 | `#fcf3f2` | Brick red tint | Error validation and exception backgrounds |

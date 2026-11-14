@@ -5,7 +5,7 @@
   "description": "Website for the Verdant Ledger Light VS Code theme.",
   "license": "MIT",
   "engines": {
-    "node": ">=22.19.0"
+    "node": ">=22.23.4"
   },
   "scripts": {
     "dev": "astro dev",
@@ -17,6 +17,6 @@
     "@fontsource/jetbrains-mono": "^5.3.0",
     "@fontsource/newsreader": "^5.3.0",
     "@shikijs/colorized-brackets": "^4.5.0",
-    "astro": "^7.3.8"
+    "astro": "^7.4.7"
   }
 }

@@ -9,7 +9,7 @@ import { resolve } from "node:path";
 import theme from "../../../themes/verdant-ledger-light-color-theme.json";
 import manifest from "../../../package.json";
 import { palette } from "../../../scripts/palette.mjs";
-import { contrast } from "../../../scripts/color.mjs";
+import { contrast, simulate, DEUTERANOPIA } from "../../../scripts/color.mjs";
 
 import showcaseTs from "../../../examples/showcase.ts?raw";
 import previewPy from "../../../examples/preview.py?raw";
@@ -22,6 +22,8 @@ const editorBackground = theme.colors["editor.background"];
 
 export const version = manifest.version;
 export const extensionId = `${manifest.publisher}.${manifest.name}`;
+// The oldest VS Code the theme supports, such as "1.80".
+export const vscodeVersion = manifest.engines.vscode.replace(/^\^/, "").replace(/\.0$/, "");
 export const repositoryUrl = manifest.repository.url.replace(/\.git$/, "");
 
 export const links = {
@@ -48,6 +50,11 @@ export const paletteEntries = Object.entries(palette).map(([hex, { name, role }]
 });
 
 export const editorBackgroundHex = editorBackground;
+
+// The colors shown on the home page, in palette order.
+export const featuredEntries = ["#1b2320", "#2d6a3b", "#8a6408", "#3d5f7a", "#367878", "#6a3b5f", "#8a2621", "#eef2ef"].map((hex) =>
+  paletteEntries.find((entry) => entry.hex === hex),
+);
 
 // The validator prints "All N checks passed." Running it here also stops the
 // build if the theme is invalid.
@@ -89,27 +96,6 @@ export const samples = [
   { id: "css", label: "CSS", lang: "css", file: "preview.css", firstLine: 1, code: trim(previewCss) },
   { id: "markdown", label: "Markdown", lang: "markdown", file: "preview.md", firstLine: 1, code: trim(previewMd) },
 ];
-
-// Machado, Oliveira and Fernandes (2009), full severity, in linear RGB.
-const DEUTERANOPIA = [
-  [0.367322, 0.860646, -0.227968],
-  [0.280085, 0.672501, 0.047413],
-  [-0.01182, 0.04294, 0.968881],
-];
-
-function simulate(hex, matrix) {
-  const toLinear = (v) => {
-    const c = v / 255;
-    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-  };
-  const toByte = (c) => {
-    const clamped = Math.min(1, Math.max(0, c));
-    const v = clamped <= 0.0031308 ? 12.92 * clamped : 1.055 * clamped ** (1 / 2.4) - 0.055;
-    return Math.round(v * 255).toString(16).padStart(2, "0");
-  };
-  const rgb = [1, 3, 5].map((i) => toLinear(parseInt(hex.slice(i, i + 2), 16)));
-  return `#${matrix.map((row) => toByte(row[0] * rgb[0] + row[1] * rgb[1] + row[2] * rgb[2])).join("")}`;
-}
 
 const error = theme.colors["editorError.foreground"];
 const warning = theme.colors["editorWarning.foreground"];

@@ -23,13 +23,13 @@ export const palette = {
 // Opaque in-between values, each with a single job.
 export const tints = {
   "#245630": "Button hover, active links, focused list match",
-  "#7f8a86": "Input, dropdown and checkbox borders; ghost text; terminal bright white",
+  "#7f8a86": "Input, dropdown and checkbox borders; bracket match outline; ghost text; quote bar; default terminal command mark; terminal bright white",
   "#8c9894": "Decorations only: indent guide, disabled breakpoint",
   "#c7d7cb": "Selected item in lists and trees",
   "#d5e1d8": "Selected item in menus, Quick Open and suggestions",
-  "#dce8df": "Inactive list selection, badges, menu bar",
+  "#dce8df": "Inactive and focused list items, badges, menu bar, status bar and secondary button hover",
   "#dfe7e1": "List hover",
-  "#e4ebe6": "Tab and button hover",
+  "#e4ebe6": "Tab hover, secondary buttons, peek view title",
   "#e4e9e6": "Indent guides and rulers",
   "#fcf3f2": "Error validation and exception backgrounds",
   "#f8edc9": "Warning validation background",

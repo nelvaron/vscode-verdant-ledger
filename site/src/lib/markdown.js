@@ -9,10 +9,12 @@ import { url } from "./url.js";
 import {
   manifest,
   version,
+  vscodeVersion,
   extensionId,
   links,
   figures,
   paletteEntries,
+  featuredEntries,
   editorBackgroundHex,
   diagnostics,
   samples,
@@ -72,7 +74,6 @@ function head(page) {
 export async function homeMarkdown() {
   const page = pages.home;
   const image = await getImage({ src: screenshot, width: 1400 });
-  const featured = ["#1b2320", "#2d6a3b", "#8a6408", "#3d5f7a", "#367878", "#6a3b5f", "#8a2621", "#eef2ef"];
 
   return join(
     head(page),
@@ -80,7 +81,7 @@ export async function homeMarkdown() {
     "Visual Studio Code theme · Light · Free",
     "Verdant Ledger Light is a low-glare theme in deep evergreen, forest green and ochre. Color is kept for meaning, and every pair is checked for contrast.",
     `- [Install from Marketplace](${links.marketplace})\n- [Open VSX](${links.openVsx})\n- [Download VSIX](${links.releases})`,
-    `Version ${version} · MIT license · VS Code 1.80+, VSCodium, Cursor, Windsurf`,
+    `Version ${version} · MIT license · VS Code ${vscodeVersion}+, VSCodium, Cursor, Windsurf`,
     "Code samples, highlighted with the theme file at build time, so every sample matches the current release:",
     samples.flatMap((sample) => {
       const lineCount = sample.code.split("\n").length;
@@ -111,10 +112,7 @@ export async function homeMarkdown() {
     `The page shows two squiggly underlines. With typical vision the error is \`${diagnostics.typical.error}\` and the warning \`${diagnostics.typical.warning}\`. With simulated deuteranopia they become \`${diagnostics.deuteranopia.error}\` and \`${diagnostics.deuteranopia.warning}\`: close in hue, still apart in lightness.`,
     `[See the contrast of every color](${absolute(pages.palette.markdownPath)})`,
     "## Fourteen colors, each with a job.",
-    featured
-      .map((hex) => paletteEntries.find((entry) => entry.hex === hex))
-      .map((entry) => `- ${entry.name}: \`${entry.hex}\``)
-      .join("\n"),
+    featuredEntries.map((entry) => `- ${entry.name}: \`${entry.hex}\``).join("\n"),
     `[Open the palette ledger](${absolute(pages.palette.markdownPath)})`,
     "## Install in under a minute.",
     [
@@ -175,7 +173,7 @@ export function llmsTxt() {
       `- Version: ${version}`,
       `- License: ${manifest.license}`,
       `- Install: run \`ext install ${extensionId}\` in Quick Open, or search for "Verdant Ledger Light" in the Extensions view.`,
-      `- Works in VS Code ${manifest.engines.vscode.replace(/^\^/, "").replace(/\.0$/, "")} and later, VSCodium, Cursor, Windsurf and other Open VSX editors.`,
+      `- Works in VS Code ${vscodeVersion} and later, VSCodium, Cursor, Windsurf and other Open VSX editors.`,
     ].join("\n"),
     "Each page of this site is also available as Markdown: add `.md` to the page path (`index.md` for the home page).",
     "## Pages",

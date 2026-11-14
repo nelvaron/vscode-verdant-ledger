@@ -1,5 +1,6 @@
 // Validate the Verdant Ledger Light theme: JSON structure, palette use,
-// color keys known to VS Code, required translucency and WCAG contrast.
+// color keys known to VS Code, required translucency, WCAG contrast, color
+// vision, and that DESIGN.md and the README document the palette.
 //
 // Run with: npm test   (Node.js 18 or later, no dependencies)
 
