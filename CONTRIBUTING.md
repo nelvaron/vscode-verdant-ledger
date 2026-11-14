@@ -9,7 +9,7 @@ the known barriers and how accessibility issues are reported.
 ## Requirements
 
 - Visual Studio Code 1.80 or later.
-- Node.js 18 or later for validation, 22 or later for packaging, and 22.19 or
+- Node.js 18 or later for validation, 22 or later for packaging, and 22.23.4 or
   later for the website.
 
 ## Preview your changes
@@ -85,7 +85,7 @@ npm run dev      # http://localhost:4321/vscode-verdant-ledger/
 npm run build    # static files in site/dist
 ```
 
-The site needs Node.js 22.19 or later. It is light only and loads no
+The site needs Node.js 22.23.4 or later. It is light only and loads no
 third-party resources: fonts are bundled from Fontsource, and the only script
 switches the code sample tabs. `site/public/og.png` is the image shown when
 the site is shared.

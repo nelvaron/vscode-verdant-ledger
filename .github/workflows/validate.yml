@@ -42,7 +42,7 @@ jobs:
       # dependency that needs a newer one fails here instead of for contributors.
       - uses: actions/setup-node@v6
         with:
-          node-version: 22.19.0
+          node-version: 22.23.4
           cache: npm
           cache-dependency-path: site/package-lock.json
 
