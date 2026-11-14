@@ -121,4 +121,4 @@ The theme and this page are maintained by
 [@nelvaron](https://github.com/nelvaron). This page is reviewed with every
 release, and whenever a known barrier is fixed or a new one is found.
 
-Last reviewed: 16 October 2026, for version 1.2.0.
+Last reviewed: 14 November 2026, for version 1.2.1.

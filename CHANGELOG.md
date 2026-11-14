@@ -3,6 +3,20 @@
 All notable changes to Verdant Ledger Light are listed here. The project
 follows [Semantic Versioning](https://semver.org/).
 
+## 1.2.1 - 2026-11-14
+
+- Your own `editor.tokenColorCustomizations` for a general scope, such as
+  `variable.parameter` or `keyword`, now apply in every language. The theme had
+  62 language-specific rules that repeated general ones and took precedence
+  over them, for example for parameters in JavaScript and TypeScript. They are
+  removed; the theme's colors are unchanged.
+- README: "Turn off italics" now also covers Python's `self` and `cls` when no
+  language server is running, and the terminal contrast figures are stated
+  more precisely.
+- The package no longer includes `ACCESSIBILITY.md`; the README links to it on
+  GitHub.
+- `npm test` now rejects a syntax rule that repeats a more general one.
+
 ## 1.2.0 - 2026-10-16
 
 - Color vision: the second and third bracket levels and the teal and plum

@@ -180,6 +180,30 @@ function validateTheme(entry) {
     }
   });
 
+  // A selector that only repeats a more general rule adds nothing, and it
+  // overrides people's own tokenColorCustomizations for the general scope.
+  const selectors = theme.tokenColors.flatMap((rule, index) =>
+    [rule.scope].flat().filter((scope) => !scope.includes(" ")).map((scope) => ({ scope, index, ...rule.settings })),
+  );
+  const styleOf = (scope, skip) => {
+    let foreground;
+    let fontStyle = "";
+    const matches = selectors
+      .filter((s) => s !== skip && (scope === s.scope || scope.startsWith(`${s.scope}.`)))
+      .sort((a, b) => a.scope.length - b.scope.length || a.index - b.index);
+    for (const match of matches) {
+      foreground = match.foreground ?? foreground;
+      fontStyle = match.fontStyle ?? fontStyle;
+    }
+    return `${foreground} ${fontStyle}`;
+  };
+  for (const selector of selectors) {
+    check(
+      styleOf(selector.scope, selector) !== styleOf(selector.scope),
+      where(`tokenColors[${selector.index}]: "${selector.scope}" repeats a more general rule and can be removed`),
+    );
+  }
+
   const semantic = Object.entries(theme.semanticTokenColors ?? {}).map(([selector, style]) => [
     selector,
     typeof style === "string" ? style : style.foreground,
