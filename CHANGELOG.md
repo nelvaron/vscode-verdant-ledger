@@ -3,7 +3,7 @@
 All notable changes to Verdant Ledger Light are listed here. The project
 follows [Semantic Versioning](https://semver.org/).
 
-## 1.2.1 - 2026-11-14
+## 1.2.1 - 2026-11-15
 
 - Your own `editor.tokenColorCustomizations` for a general scope, such as
   `variable.parameter` or `keyword`, now apply in every language. The theme had
