@@ -20,7 +20,7 @@ export const palette = {
   "#ffffff": { name: "White", role: "Menus, suggestions, inputs, peek editors" },
 };
 
-// Opaque in-between values, each with a single job.
+// Opaque in-between values, each with the jobs it does.
 export const tints = {
   "#245630": "Button hover, active links, focused list match",
   "#7f8a86": "Input, dropdown and checkbox borders; bracket match outline; ghost text; quote bar; default terminal command mark; terminal bright white",

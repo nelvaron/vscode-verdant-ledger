@@ -14,6 +14,7 @@ import {
   links,
   figures,
   paletteEntries,
+  paletteCountWord,
   featuredEntries,
   editorBackgroundHex,
   diagnostics,
@@ -55,11 +56,33 @@ export const pages = {
   palette: {
     title: "Palette ledger — Verdant Ledger Light",
     description:
-      "The fourteen colors of Verdant Ledger Light, with their contrast on the editor background and the job each one does.",
+`The ${paletteCountWord} colors of Verdant Ledger Light, with their contrast on the editor background and the job each one does.`,
     path: "palette/",
     markdownPath: "palette.md",
   },
 };
+
+// The home page's features. Backticks mark code, as in Markdown.
+export const features = [
+  {
+    title: "Calm by design",
+    text: "Most code stays deep evergreen. Ochre marks keywords, forest green marks strings, slate blue marks types. Nothing else competes.",
+  },
+  {
+    title: "Readable for everyone",
+    text: "WCAG AA text, 3:1 borders and icons, and an error red that stays apart from warnings with red-green color blindness.",
+  },
+  {
+    title: "Complete",
+    text: "Diff and merge views, debugging, testing, notebooks, the Source Control graph, chat and the terminal all share the palette.",
+  },
+  {
+    title: "Semantic, not just syntax",
+    text: "Declarations are bold, deprecated symbols are struck through, and `this` and `self` stand out.",
+  },
+];
+
+export const paletteHeading = `${paletteCountWord[0].toUpperCase()}${paletteCountWord.slice(1)} colors, each with a job.`;
 
 function head(page) {
   return frontmatter({
@@ -98,20 +121,13 @@ export async function homeMarkdown() {
     "## The whole workbench, in one quiet register.",
     `![VS Code with Verdant Ledger Light: the Explorer and a TypeScript command registry with slate blue types, green strings and ochre keywords](${new URL(image.src, import.meta.env.SITE).href})`,
     "## Features",
-    "### Calm by design",
-    "Most code stays deep evergreen. Ochre marks keywords, forest green marks strings, slate blue marks types. Nothing else competes.",
-    "### Readable for everyone",
-    "WCAG AA text, 3:1 borders and icons, and an error red that stays apart from warnings with red-green color blindness.",
-    "### Complete",
-    "Diff and merge views, debugging, testing, notebooks, the Source Control graph, chat and the terminal all share the palette.",
-    "### Semantic, not just syntax",
-    "Declarations are bold, deprecated symbols are struck through, and `this` and `self` stand out.",
+    features.flatMap((feature) => [`### ${feature.title}`, feature.text]),
     "## An error should never look like a warning.",
     "Accessibility, measured",
     "With deuteranopia, red and ochre drift toward the same olive. Verdant Ledger’s red is darker than its ochre, so the difference survives as lightness.",
     `The page shows two squiggly underlines. With typical vision the error is \`${diagnostics.typical.error}\` and the warning \`${diagnostics.typical.warning}\`. With simulated deuteranopia they become \`${diagnostics.deuteranopia.error}\` and \`${diagnostics.deuteranopia.warning}\`: close in hue, still apart in lightness.`,
     `[See the contrast of every color](${absolute(pages.palette.markdownPath)})`,
-    "## Fourteen colors, each with a job.",
+    `## ${paletteHeading}`,
     featuredEntries.map((entry) => `- ${entry.name}: \`${entry.hex}\``).join("\n"),
     `[Open the palette ledger](${absolute(pages.palette.markdownPath)})`,
     "## Install in under a minute.",

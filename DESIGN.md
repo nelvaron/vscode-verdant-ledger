@@ -62,8 +62,8 @@ managed only 5.2.
 
 ## Derived tints
 
-Some interface states need a value between two palette colors. Each tint has
-a single job.
+Some interface states need a value between two palette colors. Each tint is
+listed here with every job it does.
 
 | Color | Derived from | Role |
 | --- | --- | --- |

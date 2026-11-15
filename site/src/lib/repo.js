@@ -51,6 +51,10 @@ export const paletteEntries = Object.entries(palette).map(([hex, { name, role }]
 
 export const editorBackgroundHex = editorBackground;
 
+// The size of the palette in words, such as "fourteen", for headings.
+const NUMBER_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"];
+export const paletteCountWord = NUMBER_WORDS[paletteEntries.length] ?? String(paletteEntries.length);
+
 // The colors shown on the home page, in palette order.
 export const featuredEntries = ["#1b2320", "#2d6a3b", "#8a6408", "#3d5f7a", "#367878", "#6a3b5f", "#8a2621", "#eef2ef"].map((hex) =>
   paletteEntries.find((entry) => entry.hex === hex),

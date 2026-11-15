@@ -1,0 +1,19 @@
+# Monthly version updates, one pull request per group. Security updates are
+# separate: GitHub opens those as soon as an advisory is published.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /site
+    schedule:
+      interval: monthly
+    groups:
+      site:
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]

@@ -125,8 +125,6 @@ italic, or you find italics harder to read, add this to your user settings:
           "comment",
           "punctuation.definition.comment",
           "variable.parameter",
-          "variable.parameter.js",
-          "variable.parameter.ts",
           "variable.parameter.function.language.special",
           "variable.language",
           "markup.quote"
